@@ -1,2 +1,0 @@
-# mixi
-A mixtape app.
