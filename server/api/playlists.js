@@ -31,7 +31,7 @@ router.get('/:playlistId', async (req, res, next) => {
 router.delete('/:playlistId', async (req, res, next) => {
   try {
     const playlist = await Playlist.findByPk(req.params.playlistId);
-    await Playlist.destroy(playlist);
+    await playlist.destroy();
     res.sendStatus(204);
   } catch (err) {
     next(err);
