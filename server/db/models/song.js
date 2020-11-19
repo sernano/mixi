@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require('sequelize');
+const db = require('../db');
 
 const Song = db.define('song', {
   name: {
@@ -35,6 +35,6 @@ const Song = db.define('song', {
       notEmpty: true
     }
   }
-})
+});
 
-module.exports = Song
+module.exports = Song;
