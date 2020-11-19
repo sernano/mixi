@@ -10,10 +10,29 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.post('/', async (req, res, next) => {
+  try {
+    const newPlaylist = await Playlist.create(req.body);
+    res.status(201).send(newPlaylist);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/:playlistId', async (req, res, next) => {
   try {
     const playlist = await Playlist.findByPk(req.params.playlistId);
     res.json(playlist);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete('/:playlistId', async (req, res, next) => {
+  try {
+    const playlist = await Playlist.findByPk(req.params.playlistId);
+    await Playlist.destroy(playlist);
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }

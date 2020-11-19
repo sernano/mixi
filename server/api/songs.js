@@ -10,10 +10,29 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.post('/', async (req, res, next) => {
+  try {
+    const newSong = await Song.create(req.body);
+    res.status(201).send(newSong);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/:songId', async (req, res, next) => {
   try {
     const song = await Song.findByPk(req.params.songId);
     res.json(song);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete('/:songId', async (req, res, next) => {
+  try {
+    const song = await Song.findByPk(req.params.songId);
+    await Song.destroy(song);
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }
