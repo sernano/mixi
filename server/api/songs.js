@@ -1,4 +1,4 @@
-const router = require('express').Router;
+const router = require('express').Router();
 const Song = require('../db/models/song');
 
 router.get('/', async (req, res, next) => {
