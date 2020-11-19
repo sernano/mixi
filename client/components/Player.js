@@ -1,10 +1,8 @@
 import React from 'react';
-import Amplitude from 'amplitude-js';
+import Amplitude from 'amplitudejs';
 
-export class Player extends React.Component {
-  componentDidMount() {
-    Amplitude.init();
-  }
+export default class Player extends React.Component {
+  componentDidMount() {}
   render() {
     return (
       <div>
