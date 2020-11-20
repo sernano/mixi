@@ -8,9 +8,8 @@ import {DragDrop} from '@uppy/react';
 
 const uppy = new Uppy({
   restrictions: {maxNumberOfFiles: 20, maxFileSize: 10485760},
-  //allowedFileTypes: ['.mp3', ',m4a'],
-  autoProceed: false,
-  logger: Uppy.debugLogger
+  allowedFileTypes: ['.mp3', ',m4a'],
+  autoProceed: false
 });
 
 uppy.use(XHRUpload, {
