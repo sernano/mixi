@@ -6,4 +6,5 @@
 export {default as Navbar} from './navbar';
 export {default as UserHome} from './user-home';
 export {default as Player} from './player';
+export {default as SendTape} from './send-tape';
 export {Login, Signup} from './auth-form';
