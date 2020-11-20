@@ -16,7 +16,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             Logout
           </a>
           <Link to="/player">Player</Link>
-          <Link to="/playlists">Playlists</Link>
+          <Link to="/playlists">My Tapes</Link>
+          <Link to="/send-tape">Send a Tape</Link>
         </div>
       ) : (
         <div>

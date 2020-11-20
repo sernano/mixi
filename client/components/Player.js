@@ -11,7 +11,7 @@ export class Player extends React.Component {
   }
 
   componentDidUpdate() {
-    Amplitude.bindNewElements();
+    //Amplitude.bindNewElements();
   }
 
   render() {
