@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Song = require('../db/models/song');
+const fs = require('fs');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -17,6 +18,13 @@ router.post('/', async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+});
+
+router.post('/upload', async (req, res, next) => {
+  req.files.forEach(file =>
+    fs.writeFileSync(`public/songs/${file.originalname}`, file.buffer)
+  );
+  res.sendStatus(201);
 });
 
 router.get('/:songId', async (req, res, next) => {
