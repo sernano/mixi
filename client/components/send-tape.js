@@ -31,6 +31,11 @@ class SendTape extends React.Component {
       });
     });
   }
+
+  componentWillUnmount() {
+    this.uppy.close();
+  }
+
   render() {
     return (
       <>
