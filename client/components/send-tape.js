@@ -1,6 +1,5 @@
 import React from 'react';
 import Uppy from '@uppy/core';
-import ThumbnailGenerator from '@uppy/thumbnail-generator';
 import XHRUpload from '@uppy/xhr-upload';
 
 import {DragDrop} from '@uppy/react';
@@ -25,17 +24,14 @@ class SendTape extends React.Component {
       method: 'post',
       formData: true
     });
-    this.uppy.on('file-added', file => {
-      console.log('Added file', file);
-      const fileAdded = this.uppy.getFiles();
+
+    this.uppy.on('file-added', () => {
       this.setState({
-        filesToUpload: fileAdded
+        filesToUpload: this.uppy.getFiles()
       });
-      console.log('state:', this.state);
     });
   }
   render() {
-    console.log('state:', this.state);
     return (
       <>
         <DragDrop
@@ -55,6 +51,9 @@ class SendTape extends React.Component {
         />
         <br />
         <div>
+          {this.state.filesToUpload.map(file => {
+            return <div key={file.size}>{file.name}</div>;
+          })}
           <button type="button" onClick={this.uppy.upload}>
             Upload
           </button>
