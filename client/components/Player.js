@@ -10,6 +10,10 @@ export class Player extends React.Component {
     Amplitude.init({songs: songs});
   }
 
+  componentDidUpdate() {
+    Amplitude.bindNewElements();
+  }
+
   render() {
     return (
       <div>
