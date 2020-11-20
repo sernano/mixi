@@ -5,5 +5,5 @@
  */
 export {default as Navbar} from './navbar';
 export {default as UserHome} from './user-home';
-export {default as Player} from './Player';
+export {default as Player} from './player';
 export {Login, Signup} from './auth-form';
