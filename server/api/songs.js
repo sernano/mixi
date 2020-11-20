@@ -22,12 +22,16 @@ router.post('/', async (req, res, next) => {
 });
 
 router.post('/upload', async (req, res, next) => {
-  req.files.forEach(file => {
-    const filePath = `public/songs/${file.originalname}`;
-    fs.writeFileSync(filePath, file.buffer);
-    console.log(NodeID3.read(filePath));
-  });
-  res.sendStatus(201);
+  try {
+    await req.files.forEach(file => {
+      const filePath = `public/songs/${file.originalname}`;
+      fs.writeFileSync(filePath, file.buffer);
+      console.log(NodeID3.read(filePath));
+    });
+    res.sendStatus(201);
+  } catch (err) {
+    next(err);
+  }
 });
 
 router.get('/:songId', async (req, res, next) => {
