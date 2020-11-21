@@ -23,8 +23,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const songsToPost = [];
-    await req.files.forEach(file => {
+    for (const file of req.files) {
       const mp3FilePath = `songs/${file.originalname}`;
       fs.writeFileSync(`public/${mp3FilePath}`, file.buffer);
       const mp3Id3 = NodeID3.read(`public/${mp3FilePath}`);
@@ -32,18 +31,15 @@ router.post('/', async (req, res, next) => {
         mp3Id3.album
       }.${mp3Id3.image.mime.toLowerCase()}`;
       fs.writeFileSync(`public/${imgFilePath}`, mp3Id3.image.imageBuffer);
-      songsToPost.push({
+      await Song.create({
         name: mp3Id3.title,
         artist: mp3Id3.artist,
         album: mp3Id3.album,
         songUrl: mp3FilePath,
         coverArtUrl: imgFilePath
       });
-    });
-    //TODO: get rid of bulk create and create one by one in the above
-    // loop.
-    const songs = await Song.bulkCreate(songsToPost);
-    res.status(201).send(songs);
+    }
+    res.sendStatus(201);
   } catch (err) {
     next(err);
   }
