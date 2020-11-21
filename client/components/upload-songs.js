@@ -4,7 +4,7 @@ import XHRUpload from '@uppy/xhr-upload';
 
 import {DragDrop} from '@uppy/react';
 
-class SendTape extends React.Component {
+class UploadSongs extends React.Component {
   constructor(props) {
     super(props);
     this.uppy = new Uppy({
@@ -67,4 +67,4 @@ class SendTape extends React.Component {
   }
 }
 
-export default SendTape;
+export default UploadSongs;

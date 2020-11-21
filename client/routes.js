@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter, Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {Login, Signup, UserHome, Player, SendTape} from './components';
+import {Login, Signup, UserHome, Player, UploadSongs} from './components';
 import {me} from './store';
 //import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -27,7 +27,7 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
             <Route path="/player" component={Player} />
-            <Route path="/send-tape" component={SendTape} />
+            <Route path="/upload-songs" component={UploadSongs} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
