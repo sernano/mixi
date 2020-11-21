@@ -24,9 +24,12 @@ router.post('/', async (req, res, next) => {
 router.post('/upload', async (req, res, next) => {
   try {
     await req.files.forEach(file => {
-      const filePath = `public/songs/${file.originalname}`;
-      fs.writeFileSync(filePath, file.buffer);
-      console.log(NodeID3.read(filePath));
+      console.log(file);
+      const mp3FilePath = `songs/${file.originalname}`;
+      //use the following function to write the imagefile from
+      //NodeID3.read().image.imageBuffer
+      fs.writeFileSync(mp3FilePath, file.buffer);
+      console.log(NodeID3.read(mp3FilePath));
     });
     res.sendStatus(201);
   } catch (err) {

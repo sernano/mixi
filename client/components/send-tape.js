@@ -24,7 +24,6 @@ class SendTape extends React.Component {
       method: 'post',
       formData: true
     });
-
     this.uppy.on('file-added', () => {
       this.setState({
         filesToUpload: this.uppy.getFiles()
@@ -42,7 +41,7 @@ class SendTape extends React.Component {
         <DragDrop
           width="70%"
           height="70%"
-          note="Drop yer songs here"
+          note=".mp3s only, plz"
           uppy={this.uppy}
           locale={{
             strings: {
