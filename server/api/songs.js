@@ -12,27 +12,37 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+/*router.post('/', async (req, res, next) => {
   try {
     const newSong = await Song.create(req.body);
     res.status(201).send(newSong);
   } catch (err) {
     next(err);
   }
-});
+});*/
 
 router.post('/upload', async (req, res, next) => {
   try {
+    const songsToPost = [];
     await req.files.forEach(file => {
       const mp3FilePath = `songs/${file.originalname}`;
-      fs.writeFileSync(mp3FilePath, file.buffer);
-      const mp3Id3 = NodeID3.read(mp3FilePath);
+      fs.writeFileSync(`public/${mp3FilePath}`, file.buffer);
+      const mp3Id3 = NodeID3.read(`public/${mp3FilePath}`);
       const imgFilePath = `covers/${
         mp3Id3.album
       }.${mp3Id3.image.mime.toLowerCase()}`;
-      fs.writeFileSync(imgFilePath, mp3Id3.image.imageBuffer);
+      fs.writeFileSync(`public/${imgFilePath}`, mp3Id3.image.imageBuffer);
+      songsToPost.push({
+        name: mp3Id3.title,
+        artist: mp3Id3.artist,
+        album: mp3Id3.album,
+        songUrl: mp3FilePath,
+        coverArtUrl: imgFilePath
+      });
     });
-    res.sendStatus(201);
+    const songs = await Song.bulkCreate(songsToPost);
+    console.log(songs);
+    res.status(201).send(songs);
   } catch (err) {
     next(err);
   }
