@@ -1,5 +1,6 @@
 body {
   font-family: Helvetica, sans-serif;
+  margin: 0px;
 }
 
 a {
@@ -20,6 +21,12 @@ form div {
   display: inline-block;
 }
 
+#navbar {
+  background-color: peachpuff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 #main-content {
   padding: 30px;
   display: flex;
@@ -39,4 +46,5 @@ form div {
 
 #songs-to-upload {
   padding-left: 35px;
+  width: 300px;
 }

@@ -38,6 +38,7 @@ class UploadSongs extends React.Component {
   render() {
     return (
       <>
+        <h1>Upload Songs</h1>
         <div id="upload-songs-container">
           <div id="uppy-component">
             <DragDrop
