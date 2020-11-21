@@ -30,13 +30,26 @@ export const postTape = tape => {
   };
 };
 
+export const findTapes = userId => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get(`/api/playlists/user/${userId}`);
+      dispatch(setTapes(data));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+};
+
 const initialState = {
   tapes: [],
   loading: true
 };
 
-export default function tapesReducer(state = initialState, action) {
+export default function tapes(state = initialState, action) {
   switch (action.type) {
+    case SET_TAPES:
+      return {...state, tapes: action.tapes, loading: false};
     case CREATE_TAPE:
       return {
         ...state,
