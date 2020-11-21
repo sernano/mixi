@@ -22,7 +22,7 @@ export const createTape = tape => {
 export const postTape = tape => {
   return async dispatch => {
     try {
-      const {data} = await axios.post('/api/tapes', tape);
+      const {data} = await axios.post('/api/playlists', tape);
       dispatch(createTape(data));
     } catch (err) {
       console.error(err);
@@ -35,7 +35,7 @@ const initialState = {
   loading: true
 };
 
-export default function playlistReducer(state = initialState, action) {
+export default function tapesReducer(state = initialState, action) {
   switch (action.type) {
     case CREATE_TAPE:
       return {
