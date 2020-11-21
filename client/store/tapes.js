@@ -30,7 +30,7 @@ export const postTape = tape => {
   };
 };
 
-export const findTapes = userId => {
+export const fetchTapes = userId => {
   return async dispatch => {
     try {
       const {data} = await axios.get(`/api/playlists/user/${userId}`);

@@ -1,7 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {postTape} from '../store/tapes';
 
 const defaultState = {
-  tapeName: ''
+  title: ''
 };
 
 class MakeTape extends React.Component {
@@ -19,13 +21,15 @@ class MakeTape extends React.Component {
         <form id="make-a-tape-form" onSubmit={this.handleSubmit}>
           <input
             required
-            name="name"
+            name="title"
             type="text"
             onChange={this.handleChange}
             value={this.state.tapeName}
             placeholder="tape name"
           />
+          <button type="submit">Submit</button>
         </form>
+        <br />
       </div>
     );
   }
@@ -38,6 +42,37 @@ class MakeTape extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
+    const tape = {
+      title: this.state.title,
+      slug: this.state.title
+        .split('')
+        .map(char => {
+          if (char === ' ') {
+            return '-';
+          } else {
+            return char.toLowerCase();
+          }
+        })
+        .join(''),
+      isPublic: true,
+      userId: this.props.userId
+    };
+    this.props.postTape(tape);
     this.setState(defaultState);
   }
 }
+
+const mapState = state => {
+  return {
+    tapes: state.tapes,
+    userId: state.user.id
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    postTape: tape => dispatch(postTape(tape))
+  };
+};
+
+export default connect(mapState, mapDispatch)(MakeTape);
