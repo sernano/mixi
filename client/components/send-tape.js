@@ -8,7 +8,7 @@ class SendTape extends React.Component {
   constructor(props) {
     super(props);
     this.uppy = new Uppy({
-      restrictions: {maxNumberOfFiles: 20, maxFileSize: 10485760},
+      restrictions: {maxNumberOfFiles: 20},
       allowedFileTypes: ['.mp3'],
       autoProceed: false
     });
