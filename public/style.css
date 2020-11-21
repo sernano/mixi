@@ -19,3 +19,24 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+#main-content {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#upload-songs-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#uppy-component {
+  min-width: 300px;
+  text-align: center;
+}
+
+#songs-to-upload {
+  padding-left: 35px;
+}
