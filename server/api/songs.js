@@ -62,14 +62,16 @@ router.delete('/:songId', async (req, res, next) => {
   try {
     const song = await Song.findByPk(req.params.songId);
     await song.destroy();
-    fs.unlink(`public/${song.songUrl}`, err => {
-      if (err) throw err;
-      console.log(`Deleted public/${song.songUrl}`);
-    });
-    console.log('deleted song string: ', `public/${song.coverArtUrl}`);
+    if (fs.existsSync(`public/${song.songUrl}`)) {
+      fs.unlink(`public/${song.songUrl}`, err => {
+        if (err) throw err;
+        else console.log(`Deleted public/${song.songUrl}`);
+      });
+    }
     if (fs.existsSync(`public/${song.coverArtUrl}`)) {
       fs.unlink(`public/${song.coverArtUrl}`, err => {
         if (err) throw err;
+        else console.log(`Deleted public/${song.coverArtUrl}`);
       });
     }
     res.sendStatus(204);
