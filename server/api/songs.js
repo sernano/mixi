@@ -40,8 +40,9 @@ router.post('/', async (req, res, next) => {
         coverArtUrl: imgFilePath
       });
     });
+    //TODO: get rid of bulk create and create one by one in the above
+    // loop.
     const songs = await Song.bulkCreate(songsToPost);
-    console.log(songs);
     res.status(201).send(songs);
   } catch (err) {
     next(err);
@@ -65,10 +66,12 @@ router.delete('/:songId', async (req, res, next) => {
       if (err) throw err;
       console.log(`Deleted public/${song.songUrl}`);
     });
-    fs.unlink(`public/${song.coverArtUrl}`, err => {
-      if (err) throw err;
-      console.log(`Deleted public/${song.coverArtUrl}`);
-    });
+    console.log('deleted song string: ', `public/${song.coverArtUrl}`);
+    if (fs.existsSync(`public/${song.coverArtUrl}`)) {
+      fs.unlink(`public/${song.coverArtUrl}`, err => {
+        if (err) throw err;
+      });
+    }
     res.sendStatus(204);
   } catch (err) {
     next(err);
