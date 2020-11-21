@@ -28,6 +28,19 @@ router.get('/:playlistId', async (req, res, next) => {
   }
 });
 
+router.get('/user/:userId', async (req, res, next) => {
+  try {
+    const playlists = await Playlist.findAll({
+      where: {
+        userId: req.params.userId
+      }
+    });
+    res.json(playlists);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.delete('/:playlistId', async (req, res, next) => {
   try {
     const playlist = await Playlist.findByPk(req.params.playlistId);
