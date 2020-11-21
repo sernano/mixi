@@ -24,12 +24,13 @@ router.post('/', async (req, res, next) => {
 router.post('/upload', async (req, res, next) => {
   try {
     await req.files.forEach(file => {
-      console.log(file);
       const mp3FilePath = `songs/${file.originalname}`;
-      //use the following function to write the imagefile from
-      //NodeID3.read().image.imageBuffer
       fs.writeFileSync(mp3FilePath, file.buffer);
-      console.log(NodeID3.read(mp3FilePath));
+      const mp3Id3 = NodeID3.read(mp3FilePath);
+      const imgFilePath = `covers/${
+        mp3Id3.album
+      }.${mp3Id3.image.mime.toLowerCase()}`;
+      fs.writeFileSync(imgFilePath, mp3Id3.image.imageBuffer);
     });
     res.sendStatus(201);
   } catch (err) {
