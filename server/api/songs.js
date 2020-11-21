@@ -23,23 +23,22 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    for (const file of req.files) {
-      const mp3FilePath = `songs/${file.originalname}`;
-      fs.writeFileSync(`public/${mp3FilePath}`, file.buffer);
-      const mp3Id3 = NodeID3.read(`public/${mp3FilePath}`);
-      const imgFilePath = `covers/${
-        mp3Id3.album
-      }.${mp3Id3.image.mime.toLowerCase()}`;
-      fs.writeFileSync(`public/${imgFilePath}`, mp3Id3.image.imageBuffer);
-      await Song.create({
-        name: mp3Id3.title,
-        artist: mp3Id3.artist,
-        album: mp3Id3.album,
-        songUrl: mp3FilePath,
-        coverArtUrl: imgFilePath
-      });
-    }
-    res.sendStatus(201);
+    const file = req.files[0];
+    const mp3FilePath = `songs/${file.originalname}`;
+    fs.writeFileSync(`public/${mp3FilePath}`, file.buffer);
+    const mp3Id3 = NodeID3.read(`public/${mp3FilePath}`);
+    const imgFilePath = `covers/${
+      mp3Id3.album
+    }.${mp3Id3.image.mime.toLowerCase()}`;
+    fs.writeFileSync(`public/${imgFilePath}`, mp3Id3.image.imageBuffer);
+    const song = await Song.create({
+      name: mp3Id3.title,
+      artist: mp3Id3.artist,
+      album: mp3Id3.album,
+      songUrl: mp3FilePath,
+      coverArtUrl: imgFilePath
+    });
+    res.status(201).json(song);
   } catch (err) {
     next(err);
   }
