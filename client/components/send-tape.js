@@ -20,7 +20,7 @@ class SendTape extends React.Component {
 
   componentDidMount() {
     this.uppy.use(XHRUpload, {
-      endpoint: '/api/songs/upload',
+      endpoint: '/api/songs/',
       method: 'post',
       formData: true
     });
