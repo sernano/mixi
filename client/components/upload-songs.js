@@ -38,26 +38,32 @@ class UploadSongs extends React.Component {
   render() {
     return (
       <>
-        <DragDrop
-          width="70%"
-          height="70%"
-          note=".mp3s only, plz"
-          uppy={this.uppy}
-          locale={{
-            strings: {
-              // Text to show on the droppable area.
-              // `%{browse}` is replaced with a link that opens the system file selection dialog.
-              dropHereOr: 'Drop here or %{browse}',
-              // Used as the label for the link that opens the system file selection dialog.
-              browse: 'browse'
-            }
-          }}
-        />
-        <br />
+        <div id="upload-songs-container">
+          <div id="uppy-component">
+            <DragDrop
+              width="100%"
+              height="100%"
+              note=".mp3s only, plz"
+              uppy={this.uppy}
+              locale={{
+                strings: {
+                  // Text to show on the droppable area.
+                  // `%{browse}` is replaced with a link that opens the system file selection dialog.
+                  dropHereOr: 'Drop here or %{browse}',
+                  // Used as the label for the link that opens the system file selection dialog.
+                  browse: 'browse'
+                }
+              }}
+            />
+          </div>
+          <div id="songs-to-upload">
+            <h3>Files selected:</h3>
+            {this.state.filesToUpload.map(file => {
+              return <div key={file.size}>{file.name}</div>;
+            })}
+          </div>
+        </div>
         <div>
-          {this.state.filesToUpload.map(file => {
-            return <div key={file.size}>{file.name}</div>;
-          })}
           <button type="button" onClick={this.uppy.upload}>
             Upload
           </button>
