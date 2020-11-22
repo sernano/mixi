@@ -17,19 +17,24 @@ class MakeTape extends React.Component {
   render() {
     return (
       <div>
-        <h1>Make A Tape</h1>
-        <form id="make-a-tape-form" onSubmit={this.handleSubmit}>
-          <input
-            required
-            name="title"
-            type="text"
-            onChange={this.handleChange}
-            value={this.state.title}
-            placeholder="tape name"
-          />
-          <button type="submit">Submit</button>
-        </form>
-        <br />
+        <h2>Make A Tape</h2>
+        <div id="make-a-tape-container">
+          <form id="make-a-tape-form" onSubmit={this.handleSubmit}>
+            <input
+              required
+              name="title"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.title}
+              placeholder="tape name"
+            />
+            <div>
+              <button type="submit" className="button">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
