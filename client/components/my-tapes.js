@@ -9,9 +9,14 @@ class MyTapes extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div id="tapes">
+        <h2>My Tapes</h2>
         {this.props.tapes.map((tape, idx) => {
-          return <div key={idx}>{tape.title}</div>;
+          return (
+            <div key={idx}>
+              <h3>{tape.title}</h3>
+            </div>
+          );
         })}
         <Link to="/make-tape">Make a new tape</Link>
       </div>

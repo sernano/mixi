@@ -38,7 +38,7 @@ class UploadSongs extends React.Component {
   render() {
     return (
       <>
-        <h1>Upload Songs</h1>
+        <h2>Upload Songs</h2>
         <div id="upload-songs-container">
           <div id="uppy-component">
             <DragDrop
@@ -60,12 +60,16 @@ class UploadSongs extends React.Component {
           <div id="songs-to-upload">
             <h3>Files selected:</h3>
             {this.state.filesToUpload.map(file => {
-              return <div key={file.size}>{file.name}</div>;
+              return (
+                <div key={file.size}>
+                  <h4>{file.name}</h4>
+                </div>
+              );
             })}
           </div>
         </div>
         <div>
-          <button type="button" onClick={this.uppy.upload}>
+          <button type="button" className="button" onClick={this.uppy.upload}>
             Upload
           </button>
         </div>

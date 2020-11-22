@@ -6,11 +6,36 @@ body {
 }
 
 h1 {
-  font-size: 50px;
+  font-size: 80px;
+  text-transform: uppercase;
   letter-spacing: 2px;
+  margin-bottom: 10px;
 }
+
+h2 {
+  font-size: 50px;
+  margin-top: 15px;
+  margin-bottom: 35px;
+}
+
+h3 {
+  font-size: 35px;
+  margin: 15px;
+}
+
+h4 {
+  font-size: 25px;
+}
+
+hr {
+  width: 1000px;
+  border-top: 2px solid #5b3e42;
+  border-style: solid;
+}
+
 a {
   text-decoration: none;
+  color: #5b3e42;
 }
 
 label {
@@ -25,6 +50,32 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  background-color: #5b3e42;
+  border: 3px solid #442e31;
+  padding: 15px;
+  color: #f8f0f2;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 20px;
+}
+
+.button:hover {
+  background-color: #4c373a;
+}
+
+button:focus {
+  outline-color: #4c373a;
 }
 
 #navbar {
@@ -45,11 +96,19 @@ form div {
 }
 
 #uppy-component {
-  min-width: 300px;
+  top-margin: 15px;
+  min-height: 400px;
+  min-width: 500px;
   text-align: center;
 }
 
 #songs-to-upload {
   padding-left: 35px;
-  width: 300px;
+  width: 500px;
+}
+
+#tapes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -31,11 +31,11 @@ class Routes extends Component {
           {/* Routes placed here are available to all visitors */}
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
+          <Route path="/player" component={Player} />
           {isLoggedIn && (
             <Switch>
               {/* Routes placed here are only available after logging in */}
               <Route path="/home" component={UserHome} />
-              <Route path="/player" component={Player} />
               <Route path="/my-tapes" component={MyTapes} />
               <Route path="/upload-songs" component={UploadSongs} />
               <Route path="/make-tape" component={MakeTape} />

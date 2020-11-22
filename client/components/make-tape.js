@@ -24,7 +24,7 @@ class MakeTape extends React.Component {
             name="title"
             type="text"
             onChange={this.handleChange}
-            value={this.state.tapeName}
+            value={this.state.title}
             placeholder="tape name"
           />
           <button type="submit">Submit</button>
