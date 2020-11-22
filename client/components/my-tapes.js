@@ -14,7 +14,9 @@ class MyTapes extends React.Component {
         {this.props.tapes.map((tape, idx) => {
           return (
             <div key={idx}>
-              <h3>{tape.title}</h3>
+              <h3>
+                <Link to={`/edit-tape/${tape.id}`}>{tape.title}</Link>
+              </h3>
             </div>
           );
         })}
