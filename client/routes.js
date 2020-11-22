@@ -40,7 +40,7 @@ class Routes extends Component {
               <Route path="/my-tapes" component={MyTapes} />
               <Route path="/upload-songs" component={UploadSongs} />
               <Route path="/make-tape" component={MakeTape} />
-              <Route path="/edit-tape" component={EditTape} />
+              <Route path="/edit-tape/:tapeId" component={EditTape} />
             </Switch>
           )}
           {/* Displays our Login component as a fallback */}
