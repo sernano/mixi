@@ -69,7 +69,7 @@ export default function songs(state = initialState, action) {
     case SET_SONGS:
       return action.songs;
     case ADD_SONG:
-      return [...state.songs, action.song];
+      return [...state, action.song];
     case DELETE_SONG:
       return [...state.filter(song => song.id !== action.id)];
     default:

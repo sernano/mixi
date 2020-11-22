@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const Playlist = require('../db/models/playlist');
-const PlaylistToSong = require('../db/models/playlistToSong');
+const {Song, PlaylistToSong, Playlist} = require('../db/models');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -31,7 +30,12 @@ router.post('/newSong', async (req, res, next) => {
 
 router.get('/:playlistId', async (req, res, next) => {
   try {
-    const playlist = await Playlist.findByPk(req.params.playlistId);
+    const playlist = await Playlist.findOne({
+      where: {
+        id: req.params.playlistId
+      },
+      include: [Song]
+    });
     res.json(playlist);
   } catch (err) {
     next(err);
