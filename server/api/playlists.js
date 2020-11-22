@@ -28,6 +28,21 @@ router.post('/newSong', async (req, res, next) => {
   }
 });
 
+router.delete('/removeSong', async (req, res, next) => {
+  try {
+    const songToRemove = await PlaylistToSong.findOne({
+      where: {
+        playlistId: req.body.playlistId,
+        songId: req.body.songId
+      }
+    });
+    songToRemove.destroy();
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/:playlistId', async (req, res, next) => {
   try {
     const playlist = await Playlist.findOne({

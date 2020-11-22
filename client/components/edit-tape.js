@@ -1,12 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {fetchAllSongs, deleteSong} from '../store/songs';
-import {postPlaylistToSong, fetchCurrPlaylist} from '../store/curr-tape';
+import {
+  postPlaylistToSong,
+  fetchCurrPlaylist,
+  removeSongFromTape
+} from '../store/curr-tape';
 
 class EditTape extends React.Component {
   constructor() {
     super();
     this.handleAddSong = this.handleAddSong.bind(this);
+    this.handleRemoveSong = this.handleRemoveSong.bind(this);
   }
 
   componentDidMount() {
@@ -52,7 +57,13 @@ class EditTape extends React.Component {
               return (
                 <div key={song.id}>
                   <h5>
-                    {song.artist} - {song.name}
+                    {song.artist} - {song.name}{' '}
+                    <a
+                      href="#"
+                      onClick={() => this.handleRemoveSong(song, song.id)}
+                    >
+                      -
+                    </a>
                   </h5>
                 </div>
               );
@@ -79,6 +90,15 @@ class EditTape extends React.Component {
     );
     this.props.postPlaylistToSong(song, songInfo);
   }
+
+  handleRemoveSong(song, songId) {
+    const songInfo = this.formatSongFactory(
+      songId,
+      parseInt(this.props.match.params.tapeId),
+      null
+    );
+    this.props.removeSongFromTape(song, songInfo);
+  }
 }
 
 const mapState = state => {
@@ -94,7 +114,9 @@ const mapDispatch = dispatch => {
     deleteSong: id => dispatch(deleteSong(id)),
     postPlaylistToSong: (song, playlistInfo) =>
       dispatch(postPlaylistToSong(song, playlistInfo)),
-    fetchCurrPlaylist: id => dispatch(fetchCurrPlaylist(id))
+    fetchCurrPlaylist: id => dispatch(fetchCurrPlaylist(id)),
+    removeSongFromTape: (song, playlistInfo) =>
+      dispatch(removeSongFromTape(song, playlistInfo))
   };
 };
 

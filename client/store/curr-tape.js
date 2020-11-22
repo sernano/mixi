@@ -11,7 +11,8 @@
 import axios from 'axios';
 
 const SET_SONGS = 'SET_SONG';
-const ADD_SONG = 'ADD_SONG';
+const ADD_SONG = 'ADD_SONG_TO_TAPE';
+const REMOVE_SONG = 'REMOVE_SONG_FROM_TAPE';
 
 const setSongs = songs => {
   return {
@@ -23,6 +24,13 @@ const setSongs = songs => {
 const addSong = song => {
   return {
     type: ADD_SONG,
+    song
+  };
+};
+
+const removeSong = song => {
+  return {
+    type: REMOVE_SONG,
     song
   };
 };
@@ -50,6 +58,16 @@ export const postPlaylistToSong = (song, playlistInfo) => {
   };
 };
 
+export const removeSongFromTape = (song, playlistInfo) => {
+  return async dispatch => {
+    try {
+      await axios.delete('/api/playlists/removeSong', {data: playlistInfo});
+      dispatch(removeSong(song));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+};
 const initialState = [];
 
 export default function tapeSongs(state = initialState, action) {
@@ -58,6 +76,8 @@ export default function tapeSongs(state = initialState, action) {
       return action.songs;
     case ADD_SONG:
       return [...state, action.song];
+    case REMOVE_SONG:
+      return [...state.filter(song => song.id !== action.song.id)];
     default:
       return state;
   }
