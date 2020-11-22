@@ -9,7 +9,8 @@ import {
   Player,
   UploadSongs,
   MakeTape,
-  MyTapes
+  MyTapes,
+  EditTape
 } from './components';
 import {me} from './store';
 //import 'bootstrap/dist/css/bootstrap.min.css';
@@ -39,6 +40,7 @@ class Routes extends Component {
               <Route path="/my-tapes" component={MyTapes} />
               <Route path="/upload-songs" component={UploadSongs} />
               <Route path="/make-tape" component={MakeTape} />
+              <Route path="/edit-tape" component={EditTape} />
             </Switch>
           )}
           {/* Displays our Login component as a fallback */}
