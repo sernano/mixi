@@ -1,9 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {postTape} from '../store/tapes';
+import {Redirect} from 'react-router-dom';
 
 const defaultState = {
-  title: ''
+  title: '',
+  redirectToTapes: false
 };
 
 class MakeTape extends React.Component {
@@ -15,6 +17,7 @@ class MakeTape extends React.Component {
   }
 
   render() {
+    const redirectToTapes = this.state.redirectToTapes;
     return (
       <div id="make-a-tape-container">
         <h2>Make A Tape</h2>
@@ -32,6 +35,7 @@ class MakeTape extends React.Component {
               <button type="submit" className="button">
                 Submit
               </button>
+              {redirectToTapes && <Redirect to="/my-tapes" />}
             </div>
           </form>
         </div>
@@ -63,7 +67,7 @@ class MakeTape extends React.Component {
       userId: this.props.userId
     };
     this.props.postTape(tape);
-    this.setState(defaultState);
+    this.setState({redirectToTapes: true});
   }
 }
 
