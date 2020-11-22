@@ -10,7 +10,7 @@
 //
 import axios from 'axios';
 
-const SET_SONGS = 'SET_SONG';
+const SET_SONGS = 'SET_SONGS_TO_TAPE';
 const ADD_SONG = 'ADD_SONG_TO_TAPE';
 const REMOVE_SONG = 'REMOVE_SONG_FROM_TAPE';
 

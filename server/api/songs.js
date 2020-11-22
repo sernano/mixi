@@ -35,8 +35,8 @@ router.post('/', async (req, res, next) => {
       name: mp3Id3.title,
       artist: mp3Id3.artist,
       album: mp3Id3.album,
-      songUrl: mp3FilePath,
-      coverArtUrl: imgFilePath
+      songUrl: `/${mp3FilePath}`,
+      coverArtUrl: `/${imgFilePath}`
     });
     res.status(201).json(song);
   } catch (err) {

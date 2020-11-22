@@ -1,12 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Amplitude from 'amplitudejs';
-import {fetchAllSongs} from '../store/songs';
+import {fetchCurrPlaylist} from '../store/curr-tape';
 
 export class Player extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      playing: false,
+      track: null
+    };
+  }
   async componentDidMount() {
-    await this.props.fetchAllSongs();
-    const songs = this.formatSongs(this.props.songs);
+    await this.props.fetchCurrPlaylist(this.props.match.params.tapeId);
+    const songs = this.formatSongs(this.props.tapeSongs);
     Amplitude.init({songs: songs});
   }
 
@@ -14,14 +21,26 @@ export class Player extends React.Component {
     //Amplitude.bindNewElements();
   }
 
+  componentWillUnmount() {}
+
   render() {
+    const songData = Amplitude.getActiveSongMetadata();
+    const coverArtUrl = songData.cover_art_url;
+    const artistName = songData.artist;
+    const albumName = songData.album;
+    const songName = songData.name;
     return (
       <div>
+        <img src={coverArtUrl} />
+        <br />
+        {artistName} - {albumName}
+        <br />
+        {songName}
         <button type="button" onClick={Amplitude.play}>
           Play
         </button>
         <button type="button" onClick={Amplitude.stop}>
-          Stop
+          Pause
         </button>
       </div>
     );
@@ -42,13 +61,13 @@ export class Player extends React.Component {
 
 const mapState = state => {
   return {
-    songs: state.songs
+    tapeSongs: state.tapeSongs
   };
 };
 
 const mapDispatch = dispatch => {
   return {
-    fetchAllSongs: () => dispatch(fetchAllSongs())
+    fetchCurrPlaylist: id => dispatch(fetchCurrPlaylist(id))
   };
 };
 

@@ -6,6 +6,7 @@ import {
   fetchCurrPlaylist,
   removeSongFromTape
 } from '../store/curr-tape';
+import {Link} from 'react-router-dom';
 
 class EditTape extends React.Component {
   constructor() {
@@ -30,7 +31,7 @@ class EditTape extends React.Component {
       <>
         <h2>Edit Tape</h2>
         <div className="split-container">
-          <div>
+          <div className="my-songs-container">
             <h3>My Songs</h3>
             {mySongs.map(song => {
               return (
@@ -70,6 +71,9 @@ class EditTape extends React.Component {
             })}
           </div>
         </div>
+        <Link to={`/player/${this.props.match.params.tapeId}`}>
+          Listen to Tape
+        </Link>
       </>
     );
   }
