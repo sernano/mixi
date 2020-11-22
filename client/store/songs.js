@@ -4,6 +4,7 @@ import Amplitude from 'amplitudejs';
 // Action Types
 const SET_SONGS = 'SET_SONGS';
 const ADD_SONG = 'ADD_SONG';
+const DELETE_SONG = 'DELETE_SONG';
 
 // Action Creators
 const setSongs = songs => {
@@ -17,6 +18,13 @@ const addSong = song => {
   return {
     type: ADD_SONG,
     song
+  };
+};
+
+const removeSong = id => {
+  return {
+    type: DELETE_SONG,
+    id
   };
 };
 
@@ -43,6 +51,17 @@ export const fetchAllSongs = () => {
   };
 };
 
+export const deleteSong = id => {
+  return async dispatch => {
+    try {
+      await axios.delete(`/api/songs/${id}`);
+      dispatch(removeSong(id));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+};
+
 const initialState = [];
 
 export default function songs(state = initialState, action) {
@@ -51,6 +70,8 @@ export default function songs(state = initialState, action) {
       return action.songs;
     case ADD_SONG:
       return [...state.songs, action.song];
+    case DELETE_SONG:
+      return [...state.filter(song => song.id !== action.id)];
     default:
       return state;
   }

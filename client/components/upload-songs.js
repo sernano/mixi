@@ -39,7 +39,7 @@ class UploadSongs extends React.Component {
     return (
       <>
         <h2>Upload Songs</h2>
-        <div id="upload-songs-container">
+        <div className="split-container">
           <div id="uppy-component">
             <DragDrop
               width="100%"

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Playlist = require('../db/models/playlist');
+const PlaylistToSong = require('../db/models/playlistToSong');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -14,6 +15,15 @@ router.post('/', async (req, res, next) => {
   try {
     const newPlaylist = await Playlist.create(req.body);
     res.status(201).send(newPlaylist);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/newSong', async (req, res, next) => {
+  try {
+    const addSong = await PlaylistToSong.create(req.body);
+    res.status(201).send(addSong);
   } catch (err) {
     next(err);
   }

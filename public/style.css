@@ -127,9 +127,10 @@ input:focus {
   flex-direction: column;
 }
 
-#upload-songs-container {
+.split-container {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 #uppy-component {
