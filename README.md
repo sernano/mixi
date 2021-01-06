@@ -19,3 +19,14 @@ Ideas I have and what I plan to implement going forward:
 * A responsive design
 * A full-featured, in-browser audio player
 * Tape sharing with nodemailer
+
+## Installation
+
+Fork and clone this repo, then:
+
+```
+$ npm install
+$ npm run start-dev
+```
+
+Navigate to localhost:8080 to try it out!
