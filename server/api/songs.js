@@ -27,10 +27,13 @@ router.post('/', async (req, res, next) => {
     const mp3FilePath = `songs/${file.originalname}`;
     fs.writeFileSync(`public/${mp3FilePath}`, file.buffer);
     const mp3Id3 = NodeID3.read(`public/${mp3FilePath}`);
-    const imgFilePath = `covers/${
-      mp3Id3.album
-    }.${mp3Id3.image.mime.toLowerCase()}`;
-    fs.writeFileSync(`public/${imgFilePath}`, mp3Id3.image.imageBuffer);
+    let imgFilePath;
+    if (mp3Id3.image) {
+      imgFilePath = `covers/${mp3Id3.album}.${mp3Id3.image.mime.toLowerCase()}`;
+      fs.writeFileSync(`public/${imgFilePath}`, mp3Id3.image.imageBuffer);
+    } else {
+      imgFilePath = '';
+    }
     const song = await Song.create({
       name: mp3Id3.title,
       artist: mp3Id3.artist,
