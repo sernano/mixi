@@ -36,11 +36,17 @@ export class Player extends React.Component {
         {artistName} - {albumName}
         <br />
         {songName}
+        <button type="button" onClick={() => Amplitude.prev(null)}>
+          Prev
+        </button>
         <button type="button" onClick={Amplitude.play}>
           Play
         </button>
         <button type="button" onClick={Amplitude.stop}>
           Pause
+        </button>
+        <button type="button" onClick={() => Amplitude.next(null)}>
+          Next
         </button>
       </div>
     );
