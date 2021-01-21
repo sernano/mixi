@@ -12,10 +12,15 @@ class UploadSongs extends React.Component {
       allowedFileTypes: ['.mp3'],
       autoProceed: false
     });
-
     this.state = {
       filesToUpload: []
     };
+    this.handleUpload = this.handleUpload.bind(this);
+  }
+
+  async handleUpload() {
+    await this.uppy.upload();
+    this.props.history.push(`/my-tapes`);
   }
 
   componentDidMount() {
@@ -69,7 +74,7 @@ class UploadSongs extends React.Component {
           </div>
         </div>
         <div>
-          <button type="button" className="button" onClick={this.uppy.upload}>
+          <button type="button" className="button" onClick={this.handleUpload}>
             Upload
           </button>
         </div>
