@@ -23,7 +23,7 @@ router.post('/', async (req, res, next) => {
       imgFilePath = `covers/${mp3Id3.album}.${mp3Id3.image.mime.toLowerCase()}`;
       fs.writeFileSync(`public/${imgFilePath}`, mp3Id3.image.imageBuffer);
     } else {
-      imgFilePath = '';
+      imgFilePath = 'covers/no_art.png';
     }
     const song = await Song.create({
       name: mp3Id3.title,
