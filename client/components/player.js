@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Amplitude from 'amplitudejs';
 import {fetchCurrPlaylist} from '../store/curr-tape';
+import {setActiveSong} from '../store/curr-song';
 
 export class Player extends React.Component {
   constructor() {
@@ -10,11 +11,20 @@ export class Player extends React.Component {
       playing: false,
       track: null
     };
+    this.handleSongChange = this.handleSongChange.bind(this);
   }
+
   async componentDidMount() {
     await this.props.fetchCurrPlaylist(this.props.match.params.tapeId);
     const songs = this.formatSongs(this.props.tapeSongs);
-    Amplitude.init({songs: songs});
+    Amplitude.init({
+      songs: songs,
+      callbacks: {
+        song_change: this.handleSongChange,
+        next: this.handleSongChange,
+        prev: this.handleSongChange
+      }
+    });
   }
 
   componentDidUpdate() {
@@ -36,7 +46,12 @@ export class Player extends React.Component {
         {artistName} - {albumName}
         <br />
         {songName}
-        <button type="button" onClick={() => Amplitude.prev(null)}>
+        <button
+          type="button"
+          onClick={() => {
+            Amplitude.prev(null);
+          }}
+        >
           Prev
         </button>
         <button type="button" onClick={Amplitude.play}>
@@ -45,7 +60,12 @@ export class Player extends React.Component {
         <button type="button" onClick={Amplitude.stop}>
           Pause
         </button>
-        <button type="button" onClick={() => Amplitude.next(null)}>
+        <button
+          type="button"
+          onClick={() => {
+            Amplitude.next(null);
+          }}
+        >
           Next
         </button>
       </div>
@@ -63,17 +83,24 @@ export class Player extends React.Component {
       };
     });
   }
+
+  async handleSongChange() {
+    const song = await Amplitude.getActiveSongMetadata();
+    this.props.setActiveSong(song);
+  }
 }
 
 const mapState = state => {
   return {
-    tapeSongs: state.tapeSongs
+    tapeSongs: state.tapeSongs,
+    activeSong: state.songCurrentlyPlaying
   };
 };
 
 const mapDispatch = dispatch => {
   return {
-    fetchCurrPlaylist: id => dispatch(fetchCurrPlaylist(id))
+    fetchCurrPlaylist: id => dispatch(fetchCurrPlaylist(id)),
+    setActiveSong: song => dispatch(setActiveSong(song))
   };
 };
 

@@ -6,8 +6,15 @@ import user from './user';
 import songs from './songs';
 import tapes from './tapes';
 import tapeSongs from './curr-tape';
+import songCurrentlyPlaying from './curr-song';
 
-const reducer = combineReducers({user, songs, tapes, tapeSongs});
+const reducer = combineReducers({
+  user,
+  songs,
+  tapes,
+  tapeSongs,
+  songCurrentlyPlaying
+});
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 );
