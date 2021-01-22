@@ -12,15 +12,6 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-/*router.post('/', async (req, res, next) => {
-  try {
-    const newSong = await Song.create(req.body);
-    res.status(201).send(newSong);
-  } catch (err) {
-    next(err);
-  }
-});*/
-
 router.post('/', async (req, res, next) => {
   try {
     const file = req.files[0];
