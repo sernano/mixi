@@ -27,6 +27,7 @@ export class Player extends React.Component {
         stop: this.handleStop
       }
     });
+    this.handleSongChange();
   }
 
   componentDidUpdate() {
@@ -38,11 +39,11 @@ export class Player extends React.Component {
   }
 
   render() {
-    const songData = Amplitude.getActiveSongMetadata();
-    const coverArtUrl = songData.cover_art_url;
-    const artistName = songData.artist;
-    const albumName = songData.album;
-    const songName = songData.name;
+    const activeSong = this.props.activeSong;
+    const coverArtUrl = activeSong.cover_art_url;
+    const artistName = activeSong.artist;
+    const albumName = activeSong.album;
+    const songName = activeSong.name;
     return (
       <div id="player-container">
         <img src={coverArtUrl} />
