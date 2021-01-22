@@ -39,6 +39,10 @@ export class Player extends React.Component {
   }
 
   render() {
+    return this.props.activeSong ? this.renderPlayer() : this.renderLoading();
+  }
+
+  renderPlayer() {
     const activeSong = this.props.activeSong;
     const coverArtUrl = activeSong.cover_art_url;
     const artistName = activeSong.artist;
@@ -53,7 +57,11 @@ export class Player extends React.Component {
           <br />
           {albumName}
         </div>
+        <div id="player-progress-bar">
+          <input type="range" className="amplitude-song-slider" step=".1" />
+        </div>
         <div id="player-controls">
+          <br />
           <button
             type="button"
             onClick={() => {
@@ -65,7 +73,7 @@ export class Player extends React.Component {
           <button type="button" onClick={Amplitude.play}>
             Play
           </button>
-          <button type="button" onClick={Amplitude.stop}>
+          <button type="button" onClick={Amplitude.pause}>
             Pause
           </button>
           <button
@@ -79,6 +87,10 @@ export class Player extends React.Component {
         </div>
       </div>
     );
+  }
+
+  renderLoading() {
+    return <div>Loading...</div>;
   }
 
   formatSongs(songs) {
