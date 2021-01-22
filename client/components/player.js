@@ -12,6 +12,7 @@ export class Player extends React.Component {
       track: null
     };
     this.handleSongChange = this.handleSongChange.bind(this);
+    this.handleStop = this.handleStop.bind(this);
   }
 
   async componentDidMount() {
@@ -22,7 +23,8 @@ export class Player extends React.Component {
       callbacks: {
         song_change: this.handleSongChange,
         next: this.handleSongChange,
-        prev: this.handleSongChange
+        prev: this.handleSongChange,
+        stop: this.handleStop
       }
     });
   }
@@ -31,7 +33,9 @@ export class Player extends React.Component {
     //Amplitude.bindNewElements();
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    Amplitude.stop();
+  }
 
   render() {
     const songData = Amplitude.getActiveSongMetadata();
@@ -87,6 +91,10 @@ export class Player extends React.Component {
   async handleSongChange() {
     const song = await Amplitude.getActiveSongMetadata();
     this.props.setActiveSong(song);
+  }
+
+  handleStop() {
+    this.props.setActiveSong(null);
   }
 }
 
