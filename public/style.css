@@ -189,6 +189,10 @@ form#make-a-tape-form {
   align-items: center;
 }
 
+#player-album-art {
+  max-width: 500px;
+}
+
 #player-song-info {
   text-align: center;
 }

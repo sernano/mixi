@@ -50,7 +50,7 @@ export class Player extends React.Component {
     const songName = activeSong.name;
     return (
       <div id="player-container">
-        <img src={coverArtUrl} />
+        <img id="player-album-art" src={coverArtUrl} />
         <br />
         <div id="player-song-info">
           {artistName} - {songName}
