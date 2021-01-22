@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Amplitude from 'amplitudejs';
 import {fetchCurrPlaylist} from '../store/curr-tape';
 import {setActiveSong} from '../store/curr-song';
+import {Button} from 'react-bootstrap';
 
 export class Player extends React.Component {
   constructor() {
@@ -62,28 +63,28 @@ export class Player extends React.Component {
         </div>
         <div id="player-controls">
           <br />
-          <button
-            type="button"
+          <Button
+            variant="primary"
             onClick={() => {
               Amplitude.prev(null);
             }}
           >
             Prev
-          </button>
-          <button type="button" onClick={Amplitude.play}>
+          </Button>
+          <Button variant="primary" onClick={Amplitude.play}>
             Play
-          </button>
-          <button type="button" onClick={Amplitude.pause}>
+          </Button>
+          <Button type="primary" onClick={Amplitude.pause}>
             Pause
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
+            variant="primary"
             onClick={() => {
               Amplitude.next(null);
             }}
           >
             Next
-          </button>
+          </Button>
         </div>
       </div>
     );
