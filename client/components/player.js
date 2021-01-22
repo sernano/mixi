@@ -44,34 +44,38 @@ export class Player extends React.Component {
     const albumName = songData.album;
     const songName = songData.name;
     return (
-      <div>
+      <div id="player-container">
         <img src={coverArtUrl} />
         <br />
-        {artistName} - {albumName}
-        <br />
-        {songName}
-        <button
-          type="button"
-          onClick={() => {
-            Amplitude.prev(null);
-          }}
-        >
-          Prev
-        </button>
-        <button type="button" onClick={Amplitude.play}>
-          Play
-        </button>
-        <button type="button" onClick={Amplitude.stop}>
-          Pause
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            Amplitude.next(null);
-          }}
-        >
-          Next
-        </button>
+        <div id="player-song-info">
+          {artistName} - {songName}
+          <br />
+          {albumName}
+        </div>
+        <div id="player-controls">
+          <button
+            type="button"
+            onClick={() => {
+              Amplitude.prev(null);
+            }}
+          >
+            Prev
+          </button>
+          <button type="button" onClick={Amplitude.play}>
+            Play
+          </button>
+          <button type="button" onClick={Amplitude.stop}>
+            Pause
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              Amplitude.next(null);
+            }}
+          >
+            Next
+          </button>
+        </div>
       </div>
     );
   }

@@ -182,3 +182,13 @@ form#make-a-tape-form {
   flex-direction: column;
   align-items: center;
 }
+
+#player-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#player-song-info {
+  text-align: center;
+}
