@@ -26,6 +26,8 @@ Fork and clone this repo, then:
 
 ```
 $ npm install
+$ createdb mixi
+$ npm run build-client
 $ npm run start-dev
 ```
 
