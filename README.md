@@ -7,6 +7,7 @@ A mixtape app I built for a school hackathon. It allows you to create "mixtapes"
 Current features include:
 
 * User creation and login
+* A bare-bones UI
 * Song upload and library management
 * ID3 tag and album art extraction
 * Playlist creation and management
