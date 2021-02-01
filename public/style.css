@@ -1,6 +1,4 @@
 body {
-  background-color: #f2dde4;
-  color: #5b3e42;
   font-family: Helvetica, sans-serif;
   margin: 0px;
 }
@@ -9,7 +7,9 @@ h1 {
   font-size: 80px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+  margin-top: 15px;
 }
 
 h2 {
