@@ -6,34 +6,42 @@ import {logout} from '../store';
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div id="navbar">
-    <h1>Mixi</h1>
+    <Link to="/home">
+      <h1>Mixi</h1>
+    </Link>
     <nav>
-      {isLoggedIn ? (
-        <div className="nav-links">
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-          <Link to="/player">Player</Link>
-          <Link to="/my-tapes">My Tapes</Link>
-          <Link to="/upload-songs">Upload Songs</Link>
-        </div>
-      ) : (
-        <>
-          <div className="nav-links">
-            {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </div>
-        </>
-      )}
+      {isLoggedIn ? loggedInNavbar(handleClick) : loggedOutNavbar()}
       <div>
         <hr />
       </div>
     </nav>
   </div>
 );
+
+function loggedInNavbar(handleClick) {
+  return (
+    <div className="nav-links">
+      {/* The navbar will show these links after you log in */}
+      <Link to="/my-tapes">My Tapes</Link>
+      <Link to="/upload-songs">Upload Songs</Link>
+      <a href="#" onClick={handleClick}>
+        Logout
+      </a>
+    </div>
+  );
+}
+
+function loggedOutNavbar() {
+  return (
+    <>
+      <div className="nav-links">
+        {/* The navbar will show these links before you log in */}
+        <Link to="/login">Login</Link>
+        <Link to="/signup">Sign Up</Link>
+      </div>
+    </>
+  );
+}
 
 /**
  * CONTAINER
