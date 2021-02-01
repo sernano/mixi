@@ -23,7 +23,7 @@ Ideas I have and what I plan to implement going forward:
 
 ## Requirements
 
-Node version 13, or lower.
+Node version 13 or earlier.
 
 ## Installation
 
