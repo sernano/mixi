@@ -21,6 +21,10 @@ Ideas I have and what I plan to implement going forward:
 * A full-featured, in-browser audio player
 * Tape sharing with nodemailer
 
+## Requirements
+
+Node version 13, or lower.
+
 ## Installation
 
 Fork and clone this repo, then:
