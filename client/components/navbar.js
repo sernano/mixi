@@ -3,40 +3,43 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
+import {Container, Row, Col} from 'react-bootstrap';
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div id="navbar">
-    <Link to="/home">
-      <h1>Mixi</h1>
-    </Link>
-    <nav>
-      {isLoggedIn ? loggedInNavbar(handleClick) : loggedOutNavbar()}
-      <div />
-    </nav>
-  </div>
+  <Container>
+    <Row>
+      <Link to="/home">
+        <h1>Mixi</h1>
+      </Link>
+      <nav>
+        {isLoggedIn ? loggedInNavbar(handleClick) : loggedOutNavbar()}
+        <div />
+      </nav>
+    </Row>
+  </Container>
 );
 
 function loggedInNavbar(handleClick) {
   return (
-    <div className="nav-links">
+    <Col>
       {/* The navbar will show these links after you log in */}
       <Link to="/my-tapes">My Tapes</Link>
       <Link to="/upload-songs">Upload Songs</Link>
       <a href="#" onClick={handleClick}>
         Logout
       </a>
-    </div>
+    </Col>
   );
 }
 
 function loggedOutNavbar() {
   return (
     <>
-      <div className="nav-links">
+      <Col>
         {/* The navbar will show these links before you log in */}
         <Link to="/login">Login</Link>
         <Link to="/signup">Sign Up</Link>
-      </div>
+      </Col>
     </>
   );
 }

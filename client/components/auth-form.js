@@ -21,7 +21,7 @@ const AuthForm = props => {
 
   return (
     <Container>
-      <Row className="login-signup">
+      <Row>
         <Col>
           <h2>{displayName}</h2>
           <Form onSubmit={handleSubmit} name={name} className="login-form">
