@@ -24,7 +24,7 @@ const AuthForm = props => {
       <Row>
         <Col>
           <h2>{displayName}</h2>
-          <Form onSubmit={handleSubmit} name={name} className="login-form">
+          <Form onSubmit={handleSubmit} name={name}>
             <FormGroup controlId="email" name="email">
               <FormLabel>Email address</FormLabel>
               <FormControl type="email" placeholder="Enter email" required />
