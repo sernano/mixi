@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {auth} from '../store';
 import {
+  Container,
   Row,
   Col,
   Form,
@@ -19,33 +20,40 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props;
 
   return (
-    <Row className="login-signup">
-      <Col>
-        <h2>{displayName}</h2>
-        <Form onSubmit={handleSubmit} name={name} className="login-form">
-          <FormGroup controlId="login">
-            <FormLabel>Email address</FormLabel>
-            <FormControl type="email" placeholder="Enter email" required />
-          </FormGroup>
-          <FormGroup>
-            <FormLabel>Password</FormLabel>
-            <FormControl type="password" placeholder="Password" required />
-          </FormGroup>
-          <div>
-            <Button variant="primary" type="submit">
-              {displayName}
-            </Button>
-          </div>
-          {error &&
-            error.response && (
-              <div>
-                {' '}
-                <h4>{error.response.data}</h4>{' '}
-              </div>
-            )}
-        </Form>
-      </Col>
-    </Row>
+    <Container>
+      <Row className="login-signup">
+        <Col>
+          <h2>{displayName}</h2>
+          <Form onSubmit={handleSubmit} name={name} className="login-form">
+            <FormGroup controlId="email" name="email">
+              <FormLabel>Email address</FormLabel>
+              <FormControl type="email" placeholder="Enter email" required />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel>Password</FormLabel>
+              <FormControl
+                type="password"
+                placeholder="Password"
+                name="password"
+                required
+              />
+            </FormGroup>
+            <div>
+              <Button variant="primary" type="submit">
+                {displayName}
+              </Button>
+            </div>
+            {error &&
+              error.response && (
+                <div>
+                  {' '}
+                  <h4>{error.response.data}</h4>{' '}
+                </div>
+              )}
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
