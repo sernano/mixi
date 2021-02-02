@@ -2,13 +2,17 @@ import React from 'react';
 
 import {Navbar} from './components';
 import Routes from './routes';
-import {Container} from 'react-bootstrap';
+import {Container, Row, Col} from 'react-bootstrap';
 
 const App = () => {
   return (
     <Container>
-      <Navbar />
-      <Routes />
+      <Row>
+        <Col>
+          <Navbar />
+          <Routes />
+        </Col>
+      </Row>
     </Container>
   );
 };
