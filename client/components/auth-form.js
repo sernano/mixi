@@ -20,40 +20,38 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props;
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <h2>{displayName}</h2>
-          <Form onSubmit={handleSubmit} name={name}>
-            <FormGroup controlId="email" name="email">
-              <FormLabel>Email address</FormLabel>
-              <FormControl type="email" placeholder="Enter email" required />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel>Password</FormLabel>
-              <FormControl
-                type="password"
-                placeholder="Password"
-                name="password"
-                required
-              />
-            </FormGroup>
-            <div>
-              <Button variant="primary" type="submit">
-                {displayName}
-              </Button>
-            </div>
-            {error &&
-              error.response && (
-                <div>
-                  {' '}
-                  <h4>{error.response.data}</h4>{' '}
-                </div>
-              )}
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+    <Row className="justify-content-center">
+      <Col md={9} lg={6}>
+        <h2 className="text-center">{displayName}</h2>
+        <Form onSubmit={handleSubmit} name={name}>
+          <FormGroup controlId="email" name="email">
+            <FormLabel>Email address</FormLabel>
+            <FormControl type="email" placeholder="Enter email" required />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel>Password</FormLabel>
+            <FormControl
+              type="password"
+              placeholder="Password"
+              name="password"
+              required
+            />
+          </FormGroup>
+          <div className="text-center text-md-left">
+            <Button variant="primary" type="submit">
+              {displayName}
+            </Button>
+          </div>
+          {error &&
+            error.response && (
+              <div>
+                {' '}
+                <h4>{error.response.data}</h4>{' '}
+              </div>
+            )}
+        </Form>
+      </Col>
+    </Row>
   );
 };
 

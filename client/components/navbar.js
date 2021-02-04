@@ -6,14 +6,14 @@ import {logout} from '../store';
 import {Container, Row, Col, Nav} from 'react-bootstrap';
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <Container>
-    <Row>
-      <Col md={8}>
+  <Container fluid>
+    <Row className="justify-content-md-between justify-content-center">
+      <Col xs={12} md="auto">
         <Link to="/home">
-          <h1>Mixi</h1>
+          <h1 className="text-center ml-md-3">Mixi</h1>
         </Link>
       </Col>
-      <Col className="justify-content-end">
+      <Col xs="auto">
         {isLoggedIn ? loggedInNavbar(handleClick) : loggedOutNavbar()}
       </Col>
     </Row>
@@ -23,7 +23,10 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 function loggedInNavbar(handleClick) {
   return (
     <>
-      <Nav className="justify-content-end" id="nav-links">
+      <Nav
+        className="justify-content-end justify-content-md-center"
+        id="nav-links"
+      >
         {/* The navbar will show these links after you log in */}
         <Link to="/my-tapes">My Tapes</Link>
         <Link to="/upload-songs">Upload Songs</Link>
@@ -38,7 +41,10 @@ function loggedInNavbar(handleClick) {
 function loggedOutNavbar() {
   return (
     <>
-      <Nav className="justify-content-end" id="nav-links">
+      <Nav
+        className="justify-content-end justify-content-xs-center"
+        id="nav-links"
+      >
         {/* The navbar will show these links before you log in */}
         <Link to="/login">Login</Link>
         <Link to="/signup">Sign Up</Link>

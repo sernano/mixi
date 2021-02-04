@@ -2,18 +2,16 @@ import React from 'react';
 
 import {Navbar} from './components';
 import Routes from './routes';
-import {Container, Row, Col} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 
 const App = () => {
   return (
-    <Container>
-      <Row>
-        <Col>
-          <Navbar />
-          <Routes />
-        </Col>
-      </Row>
-    </Container>
+    <div>
+      <Navbar />
+      <Container>
+        <Routes />
+      </Container>
+    </div>
   );
 };
 
