@@ -4,10 +4,8 @@ body {
 }
 
 h1 {
-  font-size: 80px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-top: 15px;
 }
 
 h2 {
@@ -34,7 +32,6 @@ h5 {
 
 a {
   text-decoration: none;
-  color: #5b3e42;
 }
 
 a:hover {
