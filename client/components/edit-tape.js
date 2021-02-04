@@ -18,10 +18,50 @@ class EditTape extends React.Component {
 
   componentDidMount() {
     this.props.fetchAllSongs();
-    this.props.fetchCurrPlaylist(parseInt(this.props.match.params.tapeId));
+    this.props.fetchCurrPlaylist(Number(this.props.match.params.tapeId));
   }
 
   render() {
+    return (
+      <Row>
+        <Col xs={12}>
+          <h2>Edit Tape</h2>
+        </Col>
+        {this.tapePlaylist()}
+        {this.mySongs()}
+      </Row>
+    );
+  }
+
+  tapePlaylist() {
+    return (
+      <Col md={6}>
+        <h3>Tape Playlist</h3>
+        <ListGroup>
+          {this.props.tape.map(song => {
+            return (
+              <ListGroupItem key={song.id} className="default-cursor" action>
+                <h6>
+                  {song.artist} - {song.name}{' '}
+                  <a
+                    href="#"
+                    onClick={() => this.handleRemoveSong(song, song.id)}
+                  >
+                    -
+                  </a>
+                </h6>
+              </ListGroupItem>
+            );
+          })}
+        </ListGroup>
+        <Link to={`/player/${this.props.match.params.tapeId}`}>
+          Listen to Tape
+        </Link>
+      </Col>
+    );
+  }
+
+  mySongs() {
     const idsInPlaylist = this.props.tape.map(song => {
       return song.id;
     });
@@ -29,57 +69,26 @@ class EditTape extends React.Component {
       return !idsInPlaylist.includes(song.id);
     });
     return (
-      <Row>
-        <Col xs={12}>
-          <h2>Edit Tape</h2>
-        </Col>
-        <Col md={6}>
-          <h3>My Songs</h3>
-          <ListGroup>
-            {mySongs.map(song => {
-              return (
-                <ListGroupItem key={song.id} className="default-cursor" action>
-                  <h6>
-                    {song.artist} - {song.name}{' '}
-                    <a
-                      href="#"
-                      onClick={() => this.handleAddSong(song, song.id)}
-                    >
-                      +
-                    </a>{' '}
-                    <a href="#" onClick={() => this.props.deleteSong(song.id)}>
-                      -
-                    </a>
-                  </h6>
-                </ListGroupItem>
-              );
-            })}
-          </ListGroup>
-        </Col>
-        <Col md={6}>
-          <h3>Tape Playlist</h3>
-          <ListGroup>
-            {this.props.tape.map(song => {
-              return (
-                <ListGroupItem key={song.id} className="default-cursor" action>
-                  <h6>
-                    {song.artist} - {song.name}{' '}
-                    <a
-                      href="#"
-                      onClick={() => this.handleRemoveSong(song, song.id)}
-                    >
-                      -
-                    </a>
-                  </h6>
-                </ListGroupItem>
-              );
-            })}
-          </ListGroup>
-          <Link to={`/player/${this.props.match.params.tapeId}`}>
-            Listen to Tape
-          </Link>
-        </Col>
-      </Row>
+      <Col md={6}>
+        <h3>My Songs</h3>
+        <ListGroup>
+          {mySongs.map(song => {
+            return (
+              <ListGroupItem key={song.id} className="default-cursor" action>
+                <h6>
+                  {song.artist} - {song.name}{' '}
+                  <a href="#" onClick={() => this.handleAddSong(song, song.id)}>
+                    +
+                  </a>{' '}
+                  <a href="#" onClick={() => this.props.deleteSong(song.id)}>
+                    -
+                  </a>
+                </h6>
+              </ListGroupItem>
+            );
+          })}
+        </ListGroup>
+      </Col>
     );
   }
 
