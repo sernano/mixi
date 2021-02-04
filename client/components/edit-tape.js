@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {fetchTapes} from '../store/tapes';
 import {fetchAllSongs, deleteSong} from '../store/songs';
 import {
   postPlaylistToSong,
@@ -17,6 +18,7 @@ class EditTape extends React.Component {
   }
 
   componentDidMount() {
+    this.props.fetchTapes(this.props.user.id);
     this.props.fetchAllSongs();
     this.props.fetchCurrPlaylist(Number(this.props.match.params.tapeId));
   }
@@ -25,7 +27,11 @@ class EditTape extends React.Component {
     return (
       <Row>
         <Col xs={12}>
-          <h2>Edit Tape</h2>
+          <h2>
+            <Link to={`/player/${this.props.match.params.tapeId}`}>
+              {this.findTape(this.props.tapes)}
+            </Link>
+          </h2>
         </Col>
         {this.tapePlaylist()}
         {this.mySongs()}
@@ -54,9 +60,6 @@ class EditTape extends React.Component {
             );
           })}
         </ListGroup>
-        <Link to={`/player/${this.props.match.params.tapeId}`}>
-          Listen to Tape
-        </Link>
       </Col>
     );
   }
@@ -92,6 +95,13 @@ class EditTape extends React.Component {
     );
   }
 
+  findTape(tapes) {
+    const activeTape = tapes.filter(
+      tape => tape.id === Number(this.props.match.params.tapeId)
+    );
+    return activeTape[0] ? activeTape[0].title : '';
+  }
+
   formatSongFactory(songId, tapeId, songOrder) {
     return {
       songId: songId,
@@ -122,13 +132,16 @@ class EditTape extends React.Component {
 const mapState = state => {
   return {
     songs: state.songs,
-    tape: state.tapeSongs
+    tape: state.tapeSongs,
+    tapes: state.tapes.tapes,
+    user: state.user
   };
 };
 
 const mapDispatch = dispatch => {
   return {
     fetchAllSongs: () => dispatch(fetchAllSongs()),
+    fetchTapes: userId => dispatch(fetchTapes(userId)),
     deleteSong: id => dispatch(deleteSong(id)),
     postPlaylistToSong: (song, playlistInfo) =>
       dispatch(postPlaylistToSong(song, playlistInfo)),
