@@ -7,6 +7,7 @@ import {
   removeSongFromTape
 } from '../store/curr-tape';
 import {Link} from 'react-router-dom';
+import {Col, Row, ListGroup, ListGroupItem} from 'react-bootstrap';
 
 class EditTape extends React.Component {
   constructor() {
@@ -28,15 +29,17 @@ class EditTape extends React.Component {
       return !idsInPlaylist.includes(song.id);
     });
     return (
-      <>
-        <h2>Edit Tape</h2>
-        <div className="split-container">
-          <div className="my-songs-container">
-            <h3>My Songs</h3>
+      <Row>
+        <Col xs={12}>
+          <h2>Edit Tape</h2>
+        </Col>
+        <Col md={6}>
+          <h3>My Songs</h3>
+          <ListGroup>
             {mySongs.map(song => {
               return (
-                <div key={song.id}>
-                  <h5>
+                <ListGroupItem key={song.id} className="default-cursor" action>
+                  <h6>
                     {song.artist} - {song.name}{' '}
                     <a
                       href="#"
@@ -47,17 +50,19 @@ class EditTape extends React.Component {
                     <a href="#" onClick={() => this.props.deleteSong(song.id)}>
                       -
                     </a>
-                  </h5>
-                </div>
+                  </h6>
+                </ListGroupItem>
               );
             })}
-          </div>
-          <div className="tape-playlist-container">
-            <h3>Tape Playlist</h3>
+          </ListGroup>
+        </Col>
+        <Col md={6}>
+          <h3>Tape Playlist</h3>
+          <ListGroup>
             {this.props.tape.map(song => {
               return (
-                <div key={song.id}>
-                  <h5>
+                <ListGroupItem key={song.id} className="default-cursor" action>
+                  <h6>
                     {song.artist} - {song.name}{' '}
                     <a
                       href="#"
@@ -65,16 +70,16 @@ class EditTape extends React.Component {
                     >
                       -
                     </a>
-                  </h5>
-                </div>
+                  </h6>
+                </ListGroupItem>
               );
             })}
-          </div>
-        </div>
-        <Link to={`/player/${this.props.match.params.tapeId}`}>
-          Listen to Tape
-        </Link>
-      </>
+          </ListGroup>
+          <Link to={`/player/${this.props.match.params.tapeId}`}>
+            Listen to Tape
+          </Link>
+        </Col>
+      </Row>
     );
   }
 
