@@ -90,16 +90,8 @@ input:focus {
   outline-color: #4c373a;
 }
 
-.my-songs-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.tape-playlist-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.default-cursor {
+  cursor: default !important;
 }
 
 #navbar {
@@ -134,12 +126,6 @@ input:focus {
 }
 
 #tapes {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#make-a-tape-container {
   display: flex;
   flex-direction: column;
   align-items: center;
