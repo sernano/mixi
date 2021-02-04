@@ -103,7 +103,7 @@ class EditTape extends React.Component {
   handleAddSong(song, songId) {
     const songInfo = this.formatSongFactory(
       songId,
-      parseInt(this.props.match.params.tapeId),
+      Number(this.props.match.params.tapeId),
       this.props.tape.length + 1
     );
     this.props.postPlaylistToSong(song, songInfo);
@@ -112,7 +112,7 @@ class EditTape extends React.Component {
   handleRemoveSong(song, songId) {
     const songInfo = this.formatSongFactory(
       songId,
-      parseInt(this.props.match.params.tapeId),
+      Number(this.props.match.params.tapeId),
       null
     );
     this.props.removeSongFromTape(song, songInfo);
