@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <Container>
+      <Container className="mt-4">
         <Routes />
       </Container>
     </div>

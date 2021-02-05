@@ -28,14 +28,12 @@ class EditTape extends React.Component {
     return (
       <Row>
         <Col xs={12}>
-          <div>
-            <Link to={`/player/${this.props.match.params.tapeId}`}>
-              <span className="h2">{this.findTape(this.props.tapes)}</span>{' '}
-              <span className="h4">
-                <FontAwesomeIcon icon="play" />
-              </span>
-            </Link>
-          </div>
+          <Link to={`/player/${this.props.match.params.tapeId}`}>
+            <span className="h2">{this.findTape(this.props.tapes)}</span>{' '}
+            <span className="h4 ml-2">
+              <FontAwesomeIcon icon="play" />
+            </span>
+          </Link>
         </Col>
         {this.tapePlaylist()}
         {this.mySongs()}
@@ -45,8 +43,8 @@ class EditTape extends React.Component {
 
   tapePlaylist() {
     return (
-      <Col md={6}>
-        <h3>Tape Playlist</h3>
+      <Col md={6} className="mt-4">
+        <h3 className="mb-3">Tape Playlist</h3>
         <ListGroup>
           {this.props.tape.map(song => {
             return (
@@ -78,8 +76,8 @@ class EditTape extends React.Component {
       return !idsInPlaylist.includes(song.id);
     });
     return (
-      <Col md={6}>
-        <h3>Song Library</h3>
+      <Col md={6} className="mt-4">
+        <h3 className="mb-3">Song Library</h3>
         <ListGroup>
           {mySongs.map(song => {
             return (

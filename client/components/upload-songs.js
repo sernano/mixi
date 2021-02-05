@@ -44,7 +44,7 @@ class UploadSongs extends React.Component {
     return (
       <Row className="justify-content-center">
         <Col xs={12}>
-          <h2 className="text-center">Upload Songs</h2>
+          <h2 className="text-center mb-5">Upload Songs</h2>
         </Col>
         <Col md={6}>
           <DragDrop
@@ -63,9 +63,16 @@ class UploadSongs extends React.Component {
               }
             }}
           />
+          <Button
+            variant="primary"
+            onClick={this.handleUpload}
+            className="btn-block mt-4"
+          >
+            Upload
+          </Button>
         </Col>
         <Col md={6}>
-          <h3>Files selected:</h3>
+          <h5 className="mb-4">Files selected:</h5>
           <ListGroup>
             {this.state.filesToUpload.map(file => {
               return (
@@ -76,11 +83,6 @@ class UploadSongs extends React.Component {
             })}
           </ListGroup>
         </Col>
-        <div>
-          <Button variant="primary" onClick={this.handleUpload}>
-            Upload
-          </Button>
-        </div>
       </Row>
     );
   }

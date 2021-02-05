@@ -11,8 +11,8 @@ class MyTapes extends React.Component {
   render() {
     return (
       <Col>
-        <h2>My Tapes</h2>
-        <ListGroup>
+        <h2 className="mb-4">My Tapes</h2>
+        <ListGroup className="mb-4">
           {this.props.tapes.map(tape => {
             return (
               <ListGroupItem

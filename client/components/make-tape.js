@@ -27,7 +27,7 @@ class MakeTape extends React.Component {
     return (
       <Row className="justify-content-center">
         <Col md={9} lg={6}>
-          <h2 className="text-center">Make A Tape</h2>
+          <h2 className="text-center mb-4">Make A Tape</h2>
           <Form onSubmit={this.handleSubmit}>
             <FormGroup controlId="tape-name" name="tape-name">
               <FormLabel>Tape Name</FormLabel>
