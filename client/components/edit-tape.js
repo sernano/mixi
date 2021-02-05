@@ -29,7 +29,9 @@ class EditTape extends React.Component {
       <Row>
         <Col xs={12}>
           <Link to={`/player/${this.props.match.params.tapeId}`}>
-            <span className="h2">{this.findTape(this.props.tapes)}</span>{' '}
+            <span className="h2">
+              {this.findTape(this.props.tapes)} - Play Now
+            </span>{' '}
             <span className="h4 ml-2">
               <FontAwesomeIcon icon="play" />
             </span>
