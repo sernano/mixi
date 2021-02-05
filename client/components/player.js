@@ -23,16 +23,10 @@ export class Player extends React.Component {
       songs: songs,
       callbacks: {
         song_change: this.handleSongChange,
-        next: this.handleSongChange,
-        prev: this.handleSongChange,
         stop: this.handleStop
       }
     });
-    this.handleSongChange();
-  }
-
-  componentDidUpdate() {
-    //Amplitude.bindNewElements();
+    this.loadTape();
   }
 
   componentWillUnmount() {
@@ -63,23 +57,35 @@ export class Player extends React.Component {
         </div>
         <div id="player-controls">
           <br />
-          <FontAwesomeIcon
-            icon="fast-backward"
-            onClick={() => {
-              Amplitude.prev(null);
-            }}
-          />
-          {this.state.playing ? (
-            <FontAwesomeIcon icon="pause" onClick={this.playPause} />
-          ) : (
-            <FontAwesomeIcon icon="play" onClick={this.playPause} />
-          )}
-          <FontAwesomeIcon
-            icon="fast-forward"
-            onClick={() => {
-              Amplitude.next(null);
-            }}
-          />
+          <span className="h1">
+            <FontAwesomeIcon
+              icon="fast-backward"
+              className="player-controls"
+              onClick={() => {
+                Amplitude.prev(null);
+              }}
+            />
+            {this.state.playing ? (
+              <FontAwesomeIcon
+                icon="pause"
+                className="player-controls"
+                onClick={this.playPause}
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon="play"
+                className="player-controls"
+                onClick={this.playPause}
+              />
+            )}
+            <FontAwesomeIcon
+              icon="fast-forward"
+              className="player-controls"
+              onClick={() => {
+                Amplitude.next(null);
+              }}
+            />
+          </span>
         </div>
       </div>
     );
@@ -115,12 +121,23 @@ export class Player extends React.Component {
     });
   }
 
-  async handleSongChange() {
+  async loadTape() {
     const song = await Amplitude.getActiveSongMetadata();
     this.props.setActiveSong(song);
   }
 
+  async handleSongChange() {
+    const song = await Amplitude.getActiveSongMetadata();
+    this.props.setActiveSong(song);
+    this.setState({
+      playing: true
+    });
+  }
+
   handleStop() {
+    this.setState({
+      playing: false
+    });
     this.props.setActiveSong(null);
   }
 }
