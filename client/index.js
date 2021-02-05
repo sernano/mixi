@@ -10,6 +10,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // establishes socket connection
 import './socket';
 
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {faPlay} from '@fortawesome/free-solid-svg-icons';
+
+library.add(faPlay);
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
