@@ -2,7 +2,7 @@ import React from 'react';
 import Uppy from '@uppy/core';
 import XHRUpload from '@uppy/xhr-upload';
 import {DragDrop} from '@uppy/react';
-import {Row, Col, Button} from 'react-bootstrap';
+import {Row, Col, ListGroup, ListGroupItem, Button} from 'react-bootstrap';
 
 class UploadSongs extends React.Component {
   constructor(props) {
@@ -44,10 +44,11 @@ class UploadSongs extends React.Component {
     return (
       <Row className="justify-content-center">
         <Col xs={12}>
-          <h2>Upload Songs</h2>
+          <h2 className="text-center">Upload Songs</h2>
         </Col>
         <Col md={6}>
           <DragDrop
+            className="justify-content-center"
             width="100%"
             height="100%"
             note=".mp3s only, plz"
@@ -65,13 +66,15 @@ class UploadSongs extends React.Component {
         </Col>
         <Col md={6}>
           <h3>Files selected:</h3>
-          {this.state.filesToUpload.map(file => {
-            return (
-              <div key={file.size}>
-                <h5>{file.name}</h5>
-              </div>
-            );
-          })}
+          <ListGroup>
+            {this.state.filesToUpload.map(file => {
+              return (
+                <ListGroupItem key={file.size}>
+                  <h6>{file.name}</h6>
+                </ListGroupItem>
+              );
+            })}
+          </ListGroup>
         </Col>
         <div>
           <Button variant="primary" onClick={this.handleUpload}>
