@@ -11,9 +11,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './socket';
 
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {faPlay} from '@fortawesome/free-solid-svg-icons';
+import {
+  faPlay,
+  faPlusCircle,
+  faMinusCircle
+} from '@fortawesome/free-solid-svg-icons';
 
-library.add(faPlay);
+library.add(faPlay, faPlusCircle, faMinusCircle);
 
 ReactDOM.render(
   <Provider store={store}>

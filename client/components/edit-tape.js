@@ -9,6 +9,7 @@ import {
 } from '../store/curr-tape';
 import {Link} from 'react-router-dom';
 import {Col, Row, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 class EditTape extends React.Component {
   constructor() {
@@ -27,11 +28,14 @@ class EditTape extends React.Component {
     return (
       <Row>
         <Col xs={12}>
-          <h2>
+          <div>
             <Link to={`/player/${this.props.match.params.tapeId}`}>
-              {this.findTape(this.props.tapes)}
+              <span className="h2">{this.findTape(this.props.tapes)}</span>{' '}
+              <span className="h4">
+                <FontAwesomeIcon icon="play" />
+              </span>
             </Link>
-          </h2>
+          </div>
         </Col>
         {this.tapePlaylist()}
         {this.mySongs()}
@@ -53,7 +57,9 @@ class EditTape extends React.Component {
                     href="#"
                     onClick={() => this.handleRemoveSong(song, song.id)}
                   >
-                    -
+                    <span className="h6">
+                      <FontAwesomeIcon icon="minus-circle" />
+                    </span>
                   </a>
                 </h6>
               </ListGroupItem>
@@ -81,10 +87,14 @@ class EditTape extends React.Component {
                 <h6>
                   {song.artist} - {song.name}{' '}
                   <a href="#" onClick={() => this.handleAddSong(song, song.id)}>
-                    +
+                    <span className="h6">
+                      <FontAwesomeIcon icon="plus-circle" />
+                    </span>
                   </a>{' '}
                   <a href="#" onClick={() => this.props.deleteSong(song.id)}>
-                    -
+                    <span className="h6">
+                      <FontAwesomeIcon icon="minus-circle" />
+                    </span>
                   </a>
                 </h6>
               </ListGroupItem>
