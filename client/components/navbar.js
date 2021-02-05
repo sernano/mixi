@@ -9,7 +9,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <Container fluid>
     <Row className="justify-content-md-between justify-content-center">
       <Col xs={12} md="auto">
-        <Link to="/home">
+        <Link to="/my-tapes">
           <h1 className="text-center ml-md-3">Mixi</h1>
         </Link>
       </Col>
