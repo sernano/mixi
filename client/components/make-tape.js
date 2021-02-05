@@ -37,6 +37,7 @@ class MakeTape extends React.Component {
                 placeholder="Enter tape name"
                 onChange={this.handleChange}
                 value={this.state.title}
+                autoComplete="off"
                 required
               />
             </FormGroup>
