@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Amplitude from 'amplitudejs';
 import {fetchCurrPlaylist} from '../store/curr-tape';
 import {setActiveSong} from '../store/curr-song';
-import {Button} from 'react-bootstrap';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 export class Player extends React.Component {
   constructor() {
@@ -12,6 +12,7 @@ export class Player extends React.Component {
       playing: false,
       track: null
     };
+    this.playPause = this.playPause.bind(this);
     this.handleSongChange = this.handleSongChange.bind(this);
     this.handleStop = this.handleStop.bind(this);
   }
@@ -63,28 +64,23 @@ export class Player extends React.Component {
         </div>
         <div id="player-controls">
           <br />
-          <Button
-            variant="primary"
+          <FontAwesomeIcon
+            icon="fast-backward"
             onClick={() => {
               Amplitude.prev(null);
             }}
-          >
-            Prev
-          </Button>
-          <Button variant="primary" onClick={Amplitude.play}>
-            Play
-          </Button>
-          <Button type="primary" onClick={Amplitude.pause}>
-            Pause
-          </Button>
-          <Button
-            variant="primary"
+          />
+          {this.state.playing ? (
+            <FontAwesomeIcon icon="pause" onClick={this.playPause} />
+          ) : (
+            <FontAwesomeIcon icon="play" onClick={this.playPause} />
+          )}
+          <FontAwesomeIcon
+            icon="fast-forward"
             onClick={() => {
               Amplitude.next(null);
             }}
-          >
-            Next
-          </Button>
+          />
         </div>
       </div>
     );
@@ -92,6 +88,20 @@ export class Player extends React.Component {
 
   renderLoading() {
     return <div>Loading...</div>;
+  }
+
+  playPause() {
+    if (this.state.playing) {
+      this.setState({
+        playing: false
+      });
+      Amplitude.pause();
+    } else {
+      this.setState({
+        playing: true
+      });
+      Amplitude.play();
+    }
   }
 
   formatSongs(songs) {

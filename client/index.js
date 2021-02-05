@@ -13,11 +13,21 @@ import './socket';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {
   faPlay,
+  faPause,
   faPlusCircle,
-  faMinusCircle
+  faMinusCircle,
+  faFastForward,
+  faFastBackward
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faPlay, faPlusCircle, faMinusCircle);
+library.add(
+  faPlay,
+  faPause,
+  faFastForward,
+  faFastBackward,
+  faPlusCircle,
+  faMinusCircle
+);
 
 ReactDOM.render(
   <Provider store={store}>
