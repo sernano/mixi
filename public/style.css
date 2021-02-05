@@ -56,6 +56,11 @@ form div {
   cursor: default !important;
 }
 
+.player-controls {
+  padding: 6px;
+  color: #0471e9;
+}
+
 #player-container {
   display: flex;
   flex-direction: column;
