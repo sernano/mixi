@@ -9,8 +9,7 @@ export class Player extends React.Component {
   constructor() {
     super();
     this.state = {
-      playing: false,
-      track: null
+      playing: false
     };
     this.playPause = this.playPause.bind(this);
     this.handleSongChange = this.handleSongChange.bind(this);
