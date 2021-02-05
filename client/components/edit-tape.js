@@ -79,7 +79,7 @@ class EditTape extends React.Component {
     });
     return (
       <Col md={6}>
-        <h3>My Songs</h3>
+        <h3>Song Library</h3>
         <ListGroup>
           {mySongs.map(song => {
             return (
