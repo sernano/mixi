@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Amplitude from 'amplitudejs';
 import {fetchCurrPlaylist} from '../store/curr-tape';
 import {setActiveSong} from '../store/curr-song';
+import {Row, Col} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 export class Player extends React.Component {
@@ -44,50 +45,53 @@ export class Player extends React.Component {
     const albumName = activeSong.album;
     const songName = activeSong.name;
     return (
-      <div id="player-container">
-        <img id="player-album-art" src={coverArtUrl} />
-        <br />
-        <div id="player-song-info">
-          {artistName} - {songName}
+      <Row>
+        <Col className="text-center">
+          <img className="img-fluid mb-4" src={coverArtUrl} />
           <br />
-          {albumName}
-        </div>
-        <div id="player-progress-bar">
-          <input type="range" className="amplitude-song-slider" step=".1" />
-        </div>
-        <div id="player-controls">
-          <br />
-          <span className="h1">
-            <FontAwesomeIcon
-              icon="fast-backward"
-              className="player-controls"
-              onClick={() => {
-                Amplitude.prev(null);
-              }}
-            />
-            {this.state.playing ? (
+          <h6 className="text-center mb-0">
+            {artistName} - {songName}
+          </h6>
+          <h6 className="text-center mb-4">{albumName}</h6>
+          <input
+            type="range"
+            className="amplitude-song-slider w-50"
+            step=".1"
+          />
+          <div id="player-controls">
+            <br />
+            <span className="h1">
               <FontAwesomeIcon
-                icon="pause"
-                className="player-controls"
-                onClick={this.playPause}
+                icon="fast-backward"
+                className="mr-4 player-controls"
+                onClick={() => {
+                  Amplitude.prev(null);
+                }}
               />
-            ) : (
+              {this.state.playing ? (
+                <FontAwesomeIcon
+                  icon="pause"
+                  className="mr-4 player-controls"
+                  onClick={this.playPause}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon="play"
+                  className="mr-4 player-controls"
+                  onClick={this.playPause}
+                />
+              )}
               <FontAwesomeIcon
-                icon="play"
+                icon="fast-forward"
                 className="player-controls"
-                onClick={this.playPause}
+                onClick={() => {
+                  Amplitude.next(null);
+                }}
               />
-            )}
-            <FontAwesomeIcon
-              icon="fast-forward"
-              className="player-controls"
-              onClick={() => {
-                Amplitude.next(null);
-              }}
-            />
-          </span>
-        </div>
-      </div>
+            </span>
+          </div>
+        </Col>
+      </Row>
     );
   }
 
