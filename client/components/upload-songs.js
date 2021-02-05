@@ -68,7 +68,7 @@ class UploadSongs extends React.Component {
           {this.state.filesToUpload.map(file => {
             return (
               <div key={file.size}>
-                <h4>{file.name}</h4>
+                <h5>{file.name}</h5>
               </div>
             );
           })}

@@ -45,7 +45,7 @@ const AuthForm = props => {
             error.response && (
               <div>
                 {' '}
-                <h4>{error.response.data}</h4>{' '}
+                <h5>{error.response.data}</h5>{' '}
               </div>
             )}
         </Form>
