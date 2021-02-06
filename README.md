@@ -7,7 +7,7 @@ A mixtape app I built for a school hackathon. It allows you to create "mixtapes"
 Current features include:
 
 * User creation and login
-* A bare-bones UI
+* A bare-bones, prototype UI
 * Song upload and library management
 * ID3 tag and album art extraction
 * Playlist creation and management
@@ -17,7 +17,6 @@ Current features include:
 
 Ideas I have and what I plan to implement going forward:
 
-* A responsive design
 * A full-featured, in-browser audio player
 * Tape sharing with nodemailer
 
@@ -36,4 +35,4 @@ $ npm run build-client
 $ npm run start-dev
 ```
 
-Navigate to localhost:8080 to try it out!
+Navigate to localhost:8080 to try it out! Check the sample-mp3s folder in the topmost directory for files to upload and explore features with.
