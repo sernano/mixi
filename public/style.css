@@ -1,34 +1,29 @@
+html,
+body,
+#app {
+  height: 100%;
+}
+
+.container,
+.container-fluid {
+  background-color: #ffffff;
+}
+
 body {
   font-family: Helvetica, sans-serif;
   margin: 0px;
 }
 
+div.container {
+  padding-top: 30px;
+  padding-bottom: 60px;
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
 h1 {
   text-transform: uppercase;
   letter-spacing: 2px;
-}
-
-h2 {
-  font-size: 50px;
-  margin-top: 15px;
-  margin-bottom: 35px;
-}
-
-h3 {
-  font-size: 35px;
-  margin-top: 15px;
-  margin-bottom: 25px;
-}
-
-/* Font Awesome Header Icons */
-h4 {
-  font-size: 25px;
-}
-
-h5 {
-  font-size: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
 
 a {
@@ -58,4 +53,56 @@ form div {
 
 .player-controls {
   color: #0471e9;
+}
+
+/* Totally awesome rainbow background */
+.wrapper {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  background: linear-gradient(
+    124deg,
+    #ff2400,
+    #e81d1d,
+    #e8b71d,
+    #e3e81d,
+    #1de840,
+    #1ddde8,
+    #2b1de8,
+    #dd00f3,
+    #dd00f3
+  );
+  background-size: 1800% 1800%;
+
+  -webkit-animation: rainbow 60s ease infinite;
+  -z-animation: rainbow 60s ease infinite;
+  -o-animation: rainbow 60s ease infinite;
+  animation: rainbow 60s ease infinite;
+}
+
+@-webkit-keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
+}
+@-moz-keyframes rainbow {
+  0% {
+    background-position: 0% 82%;
+  }
+  50% {
+    background-position: 100% 19%;
+  }
+  100% {
+    background-position: 0% 82%;
+  }
 }
