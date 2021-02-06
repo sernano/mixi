@@ -17,6 +17,7 @@ Current features include:
 
 Ideas I have and what I plan to implement going forward:
 
+* A redesigned, robust UI with light and dark modes
 * A full-featured, in-browser audio player
 * Tape sharing with nodemailer
 
