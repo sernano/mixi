@@ -10,7 +10,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <Row className="justify-content-md-between justify-content-center">
       <Col xs={12} md="auto">
         <Link to="/my-tapes">
-          <h1 className="text-center ml-md-3">Mixi</h1>
+          <h1 className="text-center mt-2 ml-md-3">Mixi</h1>
         </Link>
       </Col>
       <Col xs="auto">
@@ -24,7 +24,7 @@ function loggedInNavbar(handleClick) {
   return (
     <>
       <Nav
-        className="justify-content-end justify-content-md-center"
+        className="h-100 align-items-center justify-content-end justify-content-md-center"
         id="nav-links"
       >
         {/* The navbar will show these links after you log in */}

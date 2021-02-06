@@ -36,18 +36,20 @@ const AuthForm = props => {
               required
             />
           </FormGroup>
-          <div className="text-center text-md-left">
+          <div className="text-center text-md-left align-items-center d-flex">
             <Button variant="primary" type="submit">
               {displayName}
             </Button>
+            {error &&
+              error.response && (
+                <div className="d-inline-block m-0 ml-4">
+                  {' '}
+                  <h6 className="text-danger mb-0">
+                    {error.response.data}
+                  </h6>{' '}
+                </div>
+              )}
           </div>
-          {error &&
-            error.response && (
-              <div>
-                {' '}
-                <h5>{error.response.data}</h5>{' '}
-              </div>
-            )}
         </Form>
       </Col>
     </Row>

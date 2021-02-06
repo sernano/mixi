@@ -47,7 +47,7 @@ export class Player extends React.Component {
     return (
       <Row>
         <Col className="text-center">
-          <img className="img-fluid mb-4" src={coverArtUrl} />
+          <img className="img-fluid mb-4 mt-md-5" src={coverArtUrl} />
           <br />
           <h6 className="text-center mb-0">
             {artistName} - {songName}
