@@ -1,15 +1,18 @@
-import React from 'react'
+import React from 'react';
 
-import {Navbar} from './components'
-import Routes from './routes'
+import {Navbar} from './components';
+import Routes from './routes';
+import {Container} from 'react-bootstrap';
 
 const App = () => {
   return (
-    <div>
+    <div className="h-100 wrapper d-flex flex-column">
       <Navbar />
-      <Routes />
+      <Container className="mt-5 mb-1 flex-grow-1">
+        <Routes />
+      </Container>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

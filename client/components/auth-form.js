@@ -2,6 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {auth} from '../store';
+import {
+  Row,
+  Col,
+  Form,
+  FormControl,
+  FormGroup,
+  FormLabel,
+  Button
+} from 'react-bootstrap';
 
 /**
  * COMPONENT
@@ -10,34 +19,40 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props;
 
   return (
-    <div className="login-signup">
-      <h2>{displayName}</h2>
-      <form className="login-signup-form" onSubmit={handleSubmit} name={name}>
-        <div>
-          <input name="email" type="text" placeholder="email" required />
-        </div>
-        <div>
-          <input
-            name="password"
-            type="password"
-            placeholder="password"
-            required
-          />
-        </div>
-        <div>
-          <button type="submit" className="button">
-            {displayName}
-          </button>
-        </div>
-        {error &&
-          error.response && (
-            <div>
-              {' '}
-              <h4>{error.response.data}</h4>{' '}
-            </div>
-          )}
-      </form>
-    </div>
+    <Row className="justify-content-center">
+      <Col md={9} lg={6}>
+        <h2 className="text-center">{displayName}</h2>
+        <Form onSubmit={handleSubmit} name={name}>
+          <FormGroup controlId="email" name="email">
+            <FormLabel>Email address</FormLabel>
+            <FormControl type="email" placeholder="Enter email" required />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel>Password</FormLabel>
+            <FormControl
+              type="password"
+              placeholder="Password"
+              name="password"
+              required
+            />
+          </FormGroup>
+          <div className="text-center text-md-left align-items-center d-flex">
+            <Button variant="primary" type="submit">
+              {displayName}
+            </Button>
+            {error &&
+              error.response && (
+                <div className="d-inline-block m-0 ml-4">
+                  {' '}
+                  <h6 className="text-danger mb-0">
+                    {error.response.data}
+                  </h6>{' '}
+                </div>
+              )}
+          </div>
+        </Form>
+      </Col>
+    </Row>
   );
 };
 

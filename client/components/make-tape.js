@@ -1,11 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {postTape} from '../store/tapes';
-import {Redirect} from 'react-router-dom';
+import {
+  Row,
+  Col,
+  Form,
+  FormControl,
+  FormGroup,
+  FormLabel,
+  Button
+} from 'react-bootstrap';
 
 const defaultState = {
-  title: '',
-  redirectToTapes: false
+  title: ''
 };
 
 class MakeTape extends React.Component {
@@ -17,29 +24,31 @@ class MakeTape extends React.Component {
   }
 
   render() {
-    const redirectToTapes = this.state.redirectToTapes;
     return (
-      <div id="make-a-tape-container">
-        <h2>Make A Tape</h2>
-        <div>
-          <form id="make-a-tape-form" onSubmit={this.handleSubmit}>
-            <input
-              required
-              name="title"
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.title}
-              placeholder="tape name"
-            />
-            <div>
-              <button type="submit" className="button">
+      <Row className="justify-content-center">
+        <Col md={9} lg={6}>
+          <h2 className="text-center mb-4">Make A Tape</h2>
+          <Form onSubmit={this.handleSubmit}>
+            <FormGroup controlId="tape-name" name="tape-name">
+              <FormLabel>Tape Name</FormLabel>
+              <FormControl
+                type="text"
+                name="title"
+                placeholder="Enter tape name"
+                onChange={this.handleChange}
+                value={this.state.title}
+                autoComplete="off"
+                required
+              />
+            </FormGroup>
+            <div className="text-center text-md-left">
+              <Button variant="primary" type="submit">
                 Submit
-              </button>
-              {redirectToTapes && <Redirect to="/my-tapes" />}
+              </Button>
             </div>
-          </form>
-        </div>
-      </div>
+          </Form>
+        </Col>
+      </Row>
     );
   }
 
@@ -67,7 +76,7 @@ class MakeTape extends React.Component {
       userId: this.props.userId
     };
     this.props.postTape(tape);
-    this.setState({redirectToTapes: true});
+    this.props.history.push('/my-tapes');
   }
 }
 

@@ -3,14 +3,16 @@ import {connect} from 'react-redux';
 import Amplitude from 'amplitudejs';
 import {fetchCurrPlaylist} from '../store/curr-tape';
 import {setActiveSong} from '../store/curr-song';
+import {Row, Col} from 'react-bootstrap';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 export class Player extends React.Component {
   constructor() {
     super();
     this.state = {
-      playing: false,
-      track: null
+      playing: false
     };
+    this.playPause = this.playPause.bind(this);
     this.handleSongChange = this.handleSongChange.bind(this);
     this.handleStop = this.handleStop.bind(this);
   }
@@ -22,16 +24,10 @@ export class Player extends React.Component {
       songs: songs,
       callbacks: {
         song_change: this.handleSongChange,
-        next: this.handleSongChange,
-        prev: this.handleSongChange,
         stop: this.handleStop
       }
     });
-    this.handleSongChange();
-  }
-
-  componentDidUpdate() {
-    //Amplitude.bindNewElements();
+    this.loadTape();
   }
 
   componentWillUnmount() {
@@ -49,48 +45,72 @@ export class Player extends React.Component {
     const albumName = activeSong.album;
     const songName = activeSong.name;
     return (
-      <div id="player-container">
-        <img id="player-album-art" src={coverArtUrl} />
-        <br />
-        <div id="player-song-info">
-          {artistName} - {songName}
+      <Row>
+        <Col className="text-center">
+          <img className="img-fluid mb-4 mt-md-5" src={coverArtUrl} />
           <br />
-          {albumName}
-        </div>
-        <div id="player-progress-bar">
-          <input type="range" className="amplitude-song-slider" step=".1" />
-        </div>
-        <div id="player-controls">
-          <br />
-          <button
-            type="button"
-            onClick={() => {
-              Amplitude.prev(null);
-            }}
-          >
-            Prev
-          </button>
-          <button type="button" onClick={Amplitude.play}>
-            Play
-          </button>
-          <button type="button" onClick={Amplitude.pause}>
-            Pause
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              Amplitude.next(null);
-            }}
-          >
-            Next
-          </button>
-        </div>
-      </div>
+          <h6 className="text-center mb-0">
+            {artistName} - {songName}
+          </h6>
+          <h6 className="text-center mb-4">{albumName}</h6>
+          <input
+            type="range"
+            className="amplitude-song-slider w-50"
+            step=".1"
+          />
+          <div id="player-controls">
+            <br />
+            <span className="h1">
+              <FontAwesomeIcon
+                icon="fast-backward"
+                className="mr-4 player-controls"
+                onClick={() => {
+                  Amplitude.prev(null);
+                }}
+              />
+              {this.state.playing ? (
+                <FontAwesomeIcon
+                  icon="pause"
+                  className="mr-4 player-controls"
+                  onClick={this.playPause}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon="play"
+                  className="mr-4 player-controls"
+                  onClick={this.playPause}
+                />
+              )}
+              <FontAwesomeIcon
+                icon="fast-forward"
+                className="player-controls"
+                onClick={() => {
+                  Amplitude.next(null);
+                }}
+              />
+            </span>
+          </div>
+        </Col>
+      </Row>
     );
   }
 
   renderLoading() {
     return <div>Loading...</div>;
+  }
+
+  playPause() {
+    if (this.state.playing) {
+      this.setState({
+        playing: false
+      });
+      Amplitude.pause();
+    } else {
+      this.setState({
+        playing: true
+      });
+      Amplitude.play();
+    }
   }
 
   formatSongs(songs) {
@@ -105,12 +125,23 @@ export class Player extends React.Component {
     });
   }
 
-  async handleSongChange() {
+  async loadTape() {
     const song = await Amplitude.getActiveSongMetadata();
     this.props.setActiveSong(song);
   }
 
+  async handleSongChange() {
+    const song = await Amplitude.getActiveSongMetadata();
+    this.props.setActiveSong(song);
+    this.setState({
+      playing: true
+    });
+  }
+
   handleStop() {
+    this.setState({
+      playing: false
+    });
     this.props.setActiveSong(null);
   }
 }

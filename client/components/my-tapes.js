@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchTapes} from '../store/tapes';
+import {Col, ListGroup, ListGroupItem} from 'react-bootstrap';
 
 class MyTapes extends React.Component {
   componentDidMount() {
@@ -9,20 +10,30 @@ class MyTapes extends React.Component {
   }
   render() {
     return (
-      <div id="tapes">
-        <h2>My Tapes</h2>
-        {this.props.tapes.map((tape, idx) => {
-          return (
-            <div key={idx}>
-              <h3>
-                <Link to={`/edit-tape/${tape.id}`}>{tape.title}</Link>
-              </h3>
-            </div>
-          );
-        })}
-        <Link to="/make-tape">Make a new tape</Link>
-      </div>
+      <Col>
+        <h2 className="mb-4">My Tapes</h2>
+        <ListGroup className="mb-4">
+          {this.props.tapes.map(tape => {
+            return (
+              <ListGroupItem
+                key={tape.id}
+                onClick={() => this.handleClick(tape.id)}
+                action
+              >
+                <h6 className="my-0">{tape.title}</h6>
+              </ListGroupItem>
+            );
+          })}
+        </ListGroup>
+        <Link to="/make-tape">
+          <h6 className="text-center">Make a new tape</h6>
+        </Link>
+      </Col>
     );
+  }
+
+  handleClick(tapeId) {
+    this.props.history.push(`/edit-tape/${tapeId}`);
   }
 }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {fetchTapes} from '../store/tapes';
 import {fetchAllSongs, deleteSong} from '../store/songs';
 import {
   postPlaylistToSong,
@@ -7,6 +8,8 @@ import {
   removeSongFromTape
 } from '../store/curr-tape';
 import {Link} from 'react-router-dom';
+import {Col, Row, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 class EditTape extends React.Component {
   constructor() {
@@ -16,11 +19,58 @@ class EditTape extends React.Component {
   }
 
   componentDidMount() {
+    this.props.fetchTapes(this.props.user.id);
     this.props.fetchAllSongs();
-    this.props.fetchCurrPlaylist(parseInt(this.props.match.params.tapeId));
+    this.props.fetchCurrPlaylist(Number(this.props.match.params.tapeId));
   }
 
   render() {
+    return (
+      <Row>
+        <Col xs={12}>
+          <Link to={`/player/${this.props.match.params.tapeId}`}>
+            <span className="h2">
+              {this.findTape(this.props.tapes)} - Play Now
+            </span>{' '}
+            <span className="h4 ml-2">
+              <FontAwesomeIcon icon="play" />
+            </span>
+          </Link>
+        </Col>
+        {this.tapePlaylist()}
+        {this.mySongs()}
+      </Row>
+    );
+  }
+
+  tapePlaylist() {
+    return (
+      <Col md={6} className="mt-4">
+        <h3 className="mb-3">Tape Playlist</h3>
+        <ListGroup>
+          {this.props.tape.map(song => {
+            return (
+              <ListGroupItem key={song.id} className="default-cursor" action>
+                <h6>
+                  {song.artist} - {song.name}{' '}
+                  <a
+                    href="#"
+                    onClick={() => this.handleRemoveSong(song, song.id)}
+                  >
+                    <span className="h6">
+                      <FontAwesomeIcon icon="minus-circle" />
+                    </span>
+                  </a>
+                </h6>
+              </ListGroupItem>
+            );
+          })}
+        </ListGroup>
+      </Col>
+    );
+  }
+
+  mySongs() {
     const idsInPlaylist = this.props.tape.map(song => {
       return song.id;
     });
@@ -28,54 +78,38 @@ class EditTape extends React.Component {
       return !idsInPlaylist.includes(song.id);
     });
     return (
-      <>
-        <h2>Edit Tape</h2>
-        <div className="split-container">
-          <div className="my-songs-container">
-            <h3>My Songs</h3>
-            {mySongs.map(song => {
-              return (
-                <div key={song.id}>
-                  <h5>
-                    {song.artist} - {song.name}{' '}
-                    <a
-                      href="#"
-                      onClick={() => this.handleAddSong(song, song.id)}
-                    >
-                      +
-                    </a>{' '}
-                    <a href="#" onClick={() => this.props.deleteSong(song.id)}>
-                      -
-                    </a>
-                  </h5>
-                </div>
-              );
-            })}
-          </div>
-          <div className="tape-playlist-container">
-            <h3>Tape Playlist</h3>
-            {this.props.tape.map(song => {
-              return (
-                <div key={song.id}>
-                  <h5>
-                    {song.artist} - {song.name}{' '}
-                    <a
-                      href="#"
-                      onClick={() => this.handleRemoveSong(song, song.id)}
-                    >
-                      -
-                    </a>
-                  </h5>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <Link to={`/player/${this.props.match.params.tapeId}`}>
-          Listen to Tape
-        </Link>
-      </>
+      <Col md={6} className="mt-4">
+        <h3 className="mb-3">Song Library</h3>
+        <ListGroup>
+          {mySongs.map(song => {
+            return (
+              <ListGroupItem key={song.id} className="default-cursor" action>
+                <h6>
+                  {song.artist} - {song.name}{' '}
+                  <a href="#" onClick={() => this.handleAddSong(song, song.id)}>
+                    <span className="h6">
+                      <FontAwesomeIcon icon="plus-circle" />
+                    </span>
+                  </a>{' '}
+                  <a href="#" onClick={() => this.props.deleteSong(song.id)}>
+                    <span className="h6">
+                      <FontAwesomeIcon icon="minus-circle" />
+                    </span>
+                  </a>
+                </h6>
+              </ListGroupItem>
+            );
+          })}
+        </ListGroup>
+      </Col>
     );
+  }
+
+  findTape(tapes) {
+    const activeTape = tapes.filter(
+      tape => tape.id === Number(this.props.match.params.tapeId)
+    );
+    return activeTape[0] ? activeTape[0].title : '';
   }
 
   formatSongFactory(songId, tapeId, songOrder) {
@@ -89,7 +123,7 @@ class EditTape extends React.Component {
   handleAddSong(song, songId) {
     const songInfo = this.formatSongFactory(
       songId,
-      parseInt(this.props.match.params.tapeId),
+      Number(this.props.match.params.tapeId),
       this.props.tape.length + 1
     );
     this.props.postPlaylistToSong(song, songInfo);
@@ -98,7 +132,7 @@ class EditTape extends React.Component {
   handleRemoveSong(song, songId) {
     const songInfo = this.formatSongFactory(
       songId,
-      parseInt(this.props.match.params.tapeId),
+      Number(this.props.match.params.tapeId),
       null
     );
     this.props.removeSongFromTape(song, songInfo);
@@ -108,13 +142,16 @@ class EditTape extends React.Component {
 const mapState = state => {
   return {
     songs: state.songs,
-    tape: state.tapeSongs
+    tape: state.tapeSongs,
+    tapes: state.tapes.tapes,
+    user: state.user
   };
 };
 
 const mapDispatch = dispatch => {
   return {
     fetchAllSongs: () => dispatch(fetchAllSongs()),
+    fetchTapes: userId => dispatch(fetchTapes(userId)),
     deleteSong: id => dispatch(deleteSong(id)),
     postPlaylistToSong: (song, playlistInfo) =>
       dispatch(postPlaylistToSong(song, playlistInfo)),
