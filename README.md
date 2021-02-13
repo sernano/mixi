@@ -42,12 +42,8 @@ Navigate to localhost:8080.
 
 Start by uploading mp3s to your library. Check the sample-mp3s folder in the topmost directory of this repo for some files to work with.
 
-![Upload files](https://github.com/sernano/mixi/raw/master/screenshots/mixi1.gif)
-
 One your library is populated, you can select a tape to edit its playlist. Clicking the + next to a song in the Library column will add it
 to your playlist. If you'd like to remove a song from a tape's playlist, click the - next to the song in the Tape Playlist column. If
 you'd like to remove a song from your library, click the - next to the song in the Library column.
-
-![Manage library](https://github.com/sernano/mixi/raw/master/screenshots/mixi2.gif)
 
 Click Play Now to listen to the tape you created!
