@@ -1,3 +1,5 @@
+@import 'bootstrap';
+
 html,
 body,
 #app {
@@ -41,6 +43,10 @@ label {
 
 form div {
   margin: 1em;
+}
+
+input::placeholder {
+  padding-top: 0.4rem;
 }
 
 #nav-links a {
