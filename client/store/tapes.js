@@ -41,21 +41,14 @@ export const fetchTapes = userId => {
   };
 };
 
-const initialState = {
-  tapes: [],
-  loading: true
-};
+const initialState = [];
 
 export default function tapes(state = initialState, action) {
   switch (action.type) {
     case SET_TAPES:
-      return {...state, tapes: action.tapes, loading: false};
+      return action.tapes;
     case CREATE_TAPE:
-      return {
-        ...state,
-        tapes: [...state.tapes, action.tape],
-        loading: false
-      };
+      return [...state, action.tape];
     default:
       return state;
   }

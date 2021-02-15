@@ -143,7 +143,7 @@ const mapState = state => {
   return {
     songs: state.songs,
     tape: state.activeTape,
-    tapes: state.tapes.tapes,
+    tapes: state.tapes,
     user: state.user
   };
 };
