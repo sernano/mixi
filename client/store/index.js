@@ -5,14 +5,14 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import user from './user';
 import songs from './songs';
 import tapes from './tapes';
-import tapeSongs from './active-tape';
+import activeTape from './active-tape';
 import activeSong from './active-song';
 
 const reducer = combineReducers({
   user,
   songs,
   tapes,
-  tapeSongs,
+  activeTape,
   activeSong
 });
 const middleware = composeWithDevTools(

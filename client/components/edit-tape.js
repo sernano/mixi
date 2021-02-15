@@ -142,7 +142,7 @@ class EditTape extends React.Component {
 const mapState = state => {
   return {
     songs: state.songs,
-    tape: state.tapeSongs,
+    tape: state.activeTape,
     tapes: state.tapes.tapes,
     user: state.user
   };

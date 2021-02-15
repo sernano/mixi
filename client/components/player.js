@@ -19,7 +19,7 @@ export class Player extends React.Component {
 
   async componentDidMount() {
     await this.props.fetchActiveTape(this.props.match.params.tapeId);
-    const songs = this.formatSongs(this.props.tapeSongs);
+    const songs = this.formatSongs(this.props.activeTape);
     Amplitude.init({
       songs: songs,
       callbacks: {
@@ -148,7 +148,7 @@ export class Player extends React.Component {
 
 const mapState = state => {
   return {
-    tapeSongs: state.tapeSongs,
+    activeTape: state.activeTape,
     activeSong: state.activeSong
   };
 };
