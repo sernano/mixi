@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Amplitude from 'amplitudejs';
-import {fetchCurrPlaylist} from '../store/curr-tape';
-import {setActiveSong} from '../store/curr-song';
+import {fetchActiveTape} from '../store/active-tape';
+import {setActiveSong} from '../store/active-song';
 import {Row, Col} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
@@ -18,8 +18,8 @@ export class Player extends React.Component {
   }
 
   async componentDidMount() {
-    await this.props.fetchCurrPlaylist(this.props.match.params.tapeId);
-    const songs = this.formatSongs(this.props.tapeSongs);
+    await this.props.fetchActiveTape(this.props.match.params.tapeId);
+    const songs = this.formatSongs(this.props.activeTape);
     Amplitude.init({
       songs: songs,
       callbacks: {
@@ -148,14 +148,14 @@ export class Player extends React.Component {
 
 const mapState = state => {
   return {
-    tapeSongs: state.tapeSongs,
-    activeSong: state.songCurrentlyPlaying
+    activeTape: state.activeTape,
+    activeSong: state.activeSong
   };
 };
 
 const mapDispatch = dispatch => {
   return {
-    fetchCurrPlaylist: id => dispatch(fetchCurrPlaylist(id)),
+    fetchActiveTape: id => dispatch(fetchActiveTape(id)),
     setActiveSong: song => dispatch(setActiveSong(song))
   };
 };

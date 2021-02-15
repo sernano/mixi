@@ -40,7 +40,7 @@ class MyTapes extends React.Component {
 const mapState = state => {
   return {
     userId: state.user.id,
-    tapes: state.tapes.tapes
+    tapes: state.tapes
   };
 };
 

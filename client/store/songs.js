@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Amplitude from 'amplitudejs';
 
 // Action Types
 const SET_SONGS = 'SET_SONGS';

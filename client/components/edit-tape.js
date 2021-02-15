@@ -4,9 +4,9 @@ import {fetchTapes} from '../store/tapes';
 import {fetchAllSongs, deleteSong} from '../store/songs';
 import {
   postPlaylistToSong,
-  fetchCurrPlaylist,
+  fetchActiveTape,
   removeSongFromTape
-} from '../store/curr-tape';
+} from '../store/active-tape';
 import {Link} from 'react-router-dom';
 import {Col, Row, ListGroup, ListGroupItem} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -21,7 +21,7 @@ class EditTape extends React.Component {
   componentDidMount() {
     this.props.fetchTapes(this.props.user.id);
     this.props.fetchAllSongs();
-    this.props.fetchCurrPlaylist(Number(this.props.match.params.tapeId));
+    this.props.fetchActiveTape(Number(this.props.match.params.tapeId));
   }
 
   render() {
@@ -142,8 +142,8 @@ class EditTape extends React.Component {
 const mapState = state => {
   return {
     songs: state.songs,
-    tape: state.tapeSongs,
-    tapes: state.tapes.tapes,
+    tape: state.activeTape,
+    tapes: state.tapes,
     user: state.user
   };
 };
@@ -155,7 +155,7 @@ const mapDispatch = dispatch => {
     deleteSong: id => dispatch(deleteSong(id)),
     postPlaylistToSong: (song, playlistInfo) =>
       dispatch(postPlaylistToSong(song, playlistInfo)),
-    fetchCurrPlaylist: id => dispatch(fetchCurrPlaylist(id)),
+    fetchActiveTape: id => dispatch(fetchActiveTape(id)),
     removeSongFromTape: (song, playlistInfo) =>
       dispatch(removeSongFromTape(song, playlistInfo))
   };

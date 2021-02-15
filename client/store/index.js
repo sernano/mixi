@@ -5,15 +5,15 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import user from './user';
 import songs from './songs';
 import tapes from './tapes';
-import tapeSongs from './curr-tape';
-import songCurrentlyPlaying from './curr-song';
+import activeTape from './active-tape';
+import activeSong from './active-song';
 
 const reducer = combineReducers({
   user,
   songs,
   tapes,
-  tapeSongs,
-  songCurrentlyPlaying
+  activeTape,
+  activeSong
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

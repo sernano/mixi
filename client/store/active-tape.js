@@ -36,7 +36,7 @@ const removeSong = song => {
 };
 
 //Thunks
-export const fetchCurrPlaylist = id => {
+export const fetchActiveTape = id => {
   return async dispatch => {
     try {
       const {data} = await axios.get(`/api/playlists/${id}`);
@@ -70,7 +70,7 @@ export const removeSongFromTape = (song, playlistInfo) => {
 };
 const initialState = [];
 
-export default function tapeSongs(state = initialState, action) {
+export default function activeTape(state = initialState, action) {
   switch (action.type) {
     case SET_SONGS:
       return action.songs;

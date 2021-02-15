@@ -16,7 +16,7 @@ export const setActiveSong = song => {
 
 const initialState = null;
 
-export default function songCurrentlyPlaying(state = initialState, action) {
+export default function activeSong(state = initialState, action) {
   switch (action.type) {
     case SET_SONG:
       return action.song;
