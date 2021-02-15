@@ -6,17 +6,19 @@ import {logout} from '../store';
 import {Container, Row, Col, Nav} from 'react-bootstrap';
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <Container fluid>
-    <Row className="justify-content-md-between justify-content-center">
-      <Col xs={12} md="auto">
-        <Link to="/my-tapes">
-          <h1 className="text-center mt-2 ml-md-3">Mixi</h1>
-        </Link>
-      </Col>
-      <Col xs="auto">
-        {isLoggedIn ? loggedInNavbar(handleClick) : loggedOutNavbar()}
-      </Col>
-    </Row>
+  <Container fluid className="navbar-containers">
+    <Container className="py-0 navbar-containers">
+      <Row className="justify-content-md-between justify-content-center">
+        <Col xs={12} md="auto">
+          <Link to="/my-tapes">
+            <h1 className="text-center mt-2 ml-md-3">Mixi</h1>
+          </Link>
+        </Col>
+        <Col xs="auto">
+          {isLoggedIn ? loggedInNavbar(handleClick) : loggedOutNavbar()}
+        </Col>
+      </Row>
+    </Container>
   </Container>
 );
 
