@@ -1,4 +1,5 @@
 /* Fonts */
+$title-font: 'Helvetica', 'Arial', sans-serif;
 $body-font: 'Open Sans', sans-serif;
 
 /* Colors */
@@ -9,6 +10,8 @@ $darker-gray: #181a1b;
 
 /* Bootstrap Overrides */
 $body-bg: $darker-gray;
+
+$primary: #e83e8c;
 
 @import 'bootstrap';
 
@@ -25,7 +28,8 @@ body {
 }
 
 h1 {
-  text-transform: uppercase;
+  font-family: $title-font;
+  text-transform: lowercase;
   letter-spacing: 2px;
 }
 
@@ -55,15 +59,15 @@ input::placeholder {
   background-color: $dark-gray;
 }
 
-#nav-links a {
-  display: inline-block;
-  margin: 1em;
-}
-
 .default-cursor {
   cursor: default !important;
 }
 
 .player-controls {
   color: #0471e9;
+}
+
+#nav-links a {
+  display: inline-block;
+  margin: 1em;
 }

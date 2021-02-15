@@ -22,13 +22,13 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   </Container>
 );
 
+const navClasses =
+  'h-100 align-items-center justify-content-end justify-content-md-center';
+
 function loggedInNavbar(handleClick) {
   return (
     <>
-      <Nav
-        className="h-100 align-items-center justify-content-end justify-content-md-center"
-        id="nav-links"
-      >
+      <Nav className={navClasses} id="nav-links">
         {/* The navbar will show these links after you log in */}
         <Link to="/my-tapes">My Tapes</Link>
         <Link to="/upload-songs">Upload Songs</Link>
@@ -43,10 +43,7 @@ function loggedInNavbar(handleClick) {
 function loggedOutNavbar() {
   return (
     <>
-      <Nav
-        className="justify-content-end justify-content-xs-center"
-        id="nav-links"
-      >
+      <Nav className={navClasses} id="nav-links">
         {/* The navbar will show these links before you log in */}
         <Link to="/login">Login</Link>
         <Link to="/signup">Sign Up</Link>
