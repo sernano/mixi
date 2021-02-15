@@ -36,7 +36,7 @@ const removeSong = song => {
 };
 
 //Thunks
-export const fetchCurrPlaylist = id => {
+export const fetchActiveTape = id => {
   return async dispatch => {
     try {
       const {data} = await axios.get(`/api/playlists/${id}`);
