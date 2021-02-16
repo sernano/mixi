@@ -11,7 +11,7 @@ class MyTapes extends React.Component {
   render() {
     return (
       <Col>
-        <h2 className="mb-4 text-center text-md-left">My Tapes</h2>
+        <h2 className="mb-4 ml-4 text-center text-md-left">My Tapes</h2>
         <Row>
           {this.props.tapes.map(tape => {
             return (
