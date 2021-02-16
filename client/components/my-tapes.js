@@ -26,9 +26,6 @@ class MyTapes extends React.Component {
             );
           })}
         </Row>
-        <Link to="/make-tape">
-          <h6 className="text-center">Make a new tape</h6>
-        </Link>
       </Col>
     );
   }
