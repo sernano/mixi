@@ -23,7 +23,7 @@ router.post('/', async (req, res, next) => {
       imgFilePath = `covers/${mp3Id3.album}.${mp3Id3.image.mime.toLowerCase()}`;
       fs.writeFileSync(`public/${imgFilePath}`, mp3Id3.image.imageBuffer);
     } else {
-      imgFilePath = 'covers/no_art.png';
+      imgFilePath = 'covers/no_art.jpg';
     }
     const song = await Song.create({
       name: mp3Id3.title,
@@ -58,10 +58,12 @@ router.delete('/:songId', async (req, res, next) => {
       });
     }
     if (fs.existsSync(`public/${song.coverArtUrl}`)) {
-      fs.unlink(`public/${song.coverArtUrl}`, err => {
-        if (err) throw err;
-        else console.log(`Deleted public/${song.coverArtUrl}`);
-      });
+      if (song.coverArtUrl !== '/covers/no_art.jpg') {
+        fs.unlink(`public/${song.coverArtUrl}`, err => {
+          if (err) throw err;
+          else console.log(`Deleted public/${song.coverArtUrl}`);
+        });
+      }
     }
     res.sendStatus(204);
   } catch (err) {
