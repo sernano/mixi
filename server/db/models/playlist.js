@@ -19,7 +19,7 @@ const Playlist = db.define('playlist', {
   albumArtUrl: {
     type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: '/public/covers/no_art.jpg'
+    defaultValue: '/covers/no_art.jpg'
   },
   isPublic: {
     type: Sequelize.BOOLEAN,
