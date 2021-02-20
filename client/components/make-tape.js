@@ -37,12 +37,16 @@ const MakeTape = props => {
 
   return (
     <>
-      <Modal show={props.showMakeTape} onHide={props.closeMakeTape}>
-        <Modal.Header closeButton>
+      <Modal
+        show={props.showMakeTape}
+        onHide={props.closeMakeTape}
+        className="modal"
+      >
+        <Modal.Header className="modal-header" closeButton>
           <Modal.Title>Make a Tape</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleTapeSubmit}>
+        <Modal.Body className="modal-body">
+          <Form onSubmit={handleTapeSubmit} className="mt-2">
             <Form.Group controlId="tape-name" name="tape-name">
               <Form.Label>Tape Name</Form.Label>
               <Form.Control
@@ -55,16 +59,14 @@ const MakeTape = props => {
                 required
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+            <div className="d-flex justify-content-center">
+              <Button variant="primary" type="submit" className="mt-3 mb-3">
+                Submit
+              </Button>
+            </div>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={props.closeMakeTape}>
-            Close
-          </Button>
-        </Modal.Footer>
+        <Modal.Footer className="modal-footer" />
       </Modal>
     </>
   );

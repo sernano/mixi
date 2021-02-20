@@ -63,6 +63,25 @@ input::placeholder {
   background-color: $dark-gray;
 }
 
+/* Modal Styles */
+.modal {
+  border: none;
+}
+
+.modal-header {
+  background-color: $dark-gray;
+  border: none;
+}
+
+.modal-body {
+  background-color: $darker-gray;
+}
+
+.modal-footer {
+  background-color: $darker-gray;
+  border: none;
+}
+
 .default-cursor {
   cursor: default !important;
 }
