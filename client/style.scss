@@ -1,0 +1,85 @@
+/* Fonts */
+$title-font: 'Helvetica', 'Arial', sans-serif;
+$body-font: 'Open Sans', sans-serif;
+
+/* Colors */
+$lightest-gray: #c8c3bc;
+$light-gray: #3e4346;
+$dark-gray: #262a2b;
+$darker-gray: #181a1b;
+
+/* Bootstrap Overrides */
+$body-bg: $darker-gray;
+$modal-content-bg: $darker-gray;
+$modal-content-border-color: $darker-gray;
+$modal-header-border-color: $modal-content-border-color;
+
+$primary: #e83e8c;
+
+@import 'bootstrap';
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+  margin: 0px;
+  color: $lightest-gray;
+}
+
+h1 {
+  font-family: $title-font;
+  text-transform: lowercase;
+  letter-spacing: 2px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+img.album-art {
+  max-height: 200px;
+}
+
+label {
+  display: block;
+}
+
+form div {
+  margin: 1em;
+}
+
+input::placeholder {
+  padding-top: 0.4rem;
+}
+
+.navbar-containers {
+  font-family: $body-font;
+  font-size: 13px;
+  background-color: $dark-gray;
+}
+
+/* Modal Styles */
+.modal-header {
+  background-color: $dark-gray;
+}
+
+.default-cursor {
+  cursor: default !important;
+}
+
+.player-controls {
+  color: #0471e9;
+}
+
+#nav-links a {
+  display: inline-block;
+  margin: 1em;
+}

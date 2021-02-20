@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchTapes} from '../store/tapes';
-import {Col, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {Row, Col, Image} from 'react-bootstrap';
 
 class MyTapes extends React.Component {
   componentDidMount() {
@@ -12,23 +12,21 @@ class MyTapes extends React.Component {
   render() {
     return (
       <Col>
-        <h2 className="mb-4">My Tapes</h2>
-        <ListGroup className="mb-4">
+        <h2 className="mb-4 ml-4 text-center text-md-left">My Tapes</h2>
+        <Row>
           {this.props.tapes.map(tape => {
             return (
-              <ListGroupItem
-                key={tape.id}
-                onClick={() => this.handleClick(tape.id)}
-                action
-              >
-                <h6 className="my-0">{tape.title}</h6>
-              </ListGroupItem>
+              <Col key={tape.id} md={3} sm={6} className="text-center">
+                <Image
+                  src={tape.albumArtUrl}
+                  onClick={() => this.handleClick(tape.id)}
+                  className="img-thumbnail album-art"
+                />
+                <h6 className="mt-2">{tape.title}</h6>
+              </Col>
             );
           })}
-        </ListGroup>
-        <Link to="/make-tape">
-          <h6 className="text-center">Make a new tape</h6>
-        </Link>
+        </Row>
       </Col>
     );
   }

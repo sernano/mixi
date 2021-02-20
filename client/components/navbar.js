@@ -1,34 +1,46 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
 import {Container, Row, Col, Nav} from 'react-bootstrap';
+import MakeTape from './make-tape';
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <Container fluid>
-    <Row className="justify-content-md-between justify-content-center">
-      <Col xs={12} md="auto">
-        <Link to="/my-tapes">
-          <h1 className="text-center mt-2 ml-md-3">Mixi</h1>
-        </Link>
-      </Col>
-      <Col xs="auto">
-        {isLoggedIn ? loggedInNavbar(handleClick) : loggedOutNavbar()}
-      </Col>
-    </Row>
+  <Container fluid className="navbar-containers">
+    <Container className="py-0 navbar-containers">
+      <Row className="justify-content-md-between justify-content-center">
+        <Col xs={12} md="auto">
+          <Link to="/my-tapes">
+            <h1 className="text-center mt-2 ml-md-3">Mixi</h1>
+          </Link>
+        </Col>
+        <Col xs="auto">
+          {isLoggedIn ? loggedInNavbar({handleClick}) : loggedOutNavbar()}
+        </Col>
+      </Row>
+    </Container>
   </Container>
 );
 
-function loggedInNavbar(handleClick) {
+const navClasses =
+  'h-100 align-items-center justify-content-end justify-content-md-center';
+
+function loggedInNavbar({handleClick}) {
+  // Functions for Make A Tape modal
+  const [showMakeTape, setShowMakeTape] = useState(false);
+  const closeMakeTape = () => setShowMakeTape(false);
+  const openMakeTape = () => setShowMakeTape(true);
+
   return (
     <>
-      <Nav
-        className="h-100 align-items-center justify-content-end justify-content-md-center"
-        id="nav-links"
-      >
+      <MakeTape showMakeTape={showMakeTape} closeMakeTape={closeMakeTape} />
+      <Nav className={navClasses} id="nav-links">
         {/* The navbar will show these links after you log in */}
         <Link to="/my-tapes">My Tapes</Link>
+        <a href="#" onClick={openMakeTape}>
+          New Tape
+        </a>
         <Link to="/upload-songs">Upload Songs</Link>
         <a href="#" onClick={handleClick}>
           Logout
@@ -41,10 +53,7 @@ function loggedInNavbar(handleClick) {
 function loggedOutNavbar() {
   return (
     <>
-      <Nav
-        className="justify-content-end justify-content-xs-center"
-        id="nav-links"
-      >
+      <Nav className={navClasses} id="nav-links">
         {/* The navbar will show these links before you log in */}
         <Link to="/login">Login</Link>
         <Link to="/signup">Sign Up</Link>

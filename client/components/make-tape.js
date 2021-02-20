@@ -1,68 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 import {postTape} from '../store/tapes';
-import {
-  Row,
-  Col,
-  Form,
-  FormControl,
-  FormGroup,
-  FormLabel,
-  Button
-} from 'react-bootstrap';
+import {Modal, Form, Button} from 'react-bootstrap';
 
-const defaultState = {
-  title: ''
-};
+const MakeTape = props => {
+  const history = useHistory();
 
-class MakeTape extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = defaultState;
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  // Functions for setting form state
+  const [tapeForm, setTapeForm] = useState('');
+  const handleFormChange = e => setTapeForm(e.target.value);
 
-  render() {
-    return (
-      <Row className="justify-content-center">
-        <Col md={9} lg={6}>
-          <h2 className="text-center mb-4">Make A Tape</h2>
-          <Form onSubmit={this.handleSubmit}>
-            <FormGroup controlId="tape-name" name="tape-name">
-              <FormLabel>Tape Name</FormLabel>
-              <FormControl
-                type="text"
-                name="title"
-                placeholder="Enter tape name"
-                onChange={this.handleChange}
-                value={this.state.title}
-                autoComplete="off"
-                required
-              />
-            </FormGroup>
-            <div className="text-center text-md-left">
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            </div>
-          </Form>
-        </Col>
-      </Row>
-    );
-  }
-
-  handleChange(evt) {
-    this.setState({
-      [evt.target.name]: evt.target.value
-    });
-  }
-
-  handleSubmit(evt) {
-    evt.preventDefault();
+  // Function for submitting Make A Tape form
+  const handleTapeSubmit = async e => {
+    e.preventDefault();
     const tape = {
-      title: this.state.title,
-      slug: this.state.title
+      title: tapeForm,
+      slug: tapeForm
         .split('')
         .map(char => {
           if (char === ' ') {
@@ -73,16 +27,52 @@ class MakeTape extends React.Component {
         })
         .join(''),
       isPublic: true,
-      userId: this.props.userId
+      userId: props.userId
     };
-    this.props.postTape(tape);
-    this.props.history.push('/my-tapes');
-  }
-}
+    await props.postTape(tape);
+    setTapeForm('');
+    history.push('/my-tapes');
+    props.closeMakeTape();
+  };
+
+  return (
+    <>
+      <Modal
+        show={props.showMakeTape}
+        onHide={props.closeMakeTape}
+        className="modal"
+      >
+        <Modal.Header className="modal-header" closeButton>
+          <Modal.Title>Make a Tape</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleTapeSubmit} className="mt-2">
+            <Form.Group controlId="tape-name" name="tape-name">
+              <Form.Label>Tape Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="title"
+                placeholder="Enter tape name"
+                onChange={handleFormChange}
+                value={tapeForm}
+                autoComplete="off"
+                required
+              />
+            </Form.Group>
+            <div className="d-flex justify-content-center">
+              <Button variant="primary" type="submit" className="mt-3 mb-3">
+                Submit
+              </Button>
+            </div>
+          </Form>
+        </Modal.Body>
+      </Modal>
+    </>
+  );
+};
 
 const mapState = state => {
   return {
-    tapes: state.tapes,
     userId: state.user.id
   };
 };

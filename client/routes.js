@@ -37,7 +37,6 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route path="/my-tapes" component={MyTapes} />
             <Route path="/upload-songs" component={UploadSongs} />
-            <Route path="/make-tape" component={MakeTape} />
             <Route path="/edit-tape/:tapeId" component={EditTape} />
           </Switch>
         )}

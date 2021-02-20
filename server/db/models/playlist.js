@@ -16,6 +16,11 @@ const Playlist = db.define('playlist', {
       notEmpty: true
     }
   },
+  albumArtUrl: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue: '/covers/no_art.jpg'
+  },
   isPublic: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
