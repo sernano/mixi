@@ -45,7 +45,7 @@ const MakeTape = props => {
         <Modal.Header className="modal-header" closeButton>
           <Modal.Title>Make a Tape</Modal.Title>
         </Modal.Header>
-        <Modal.Body className="modal-body">
+        <Modal.Body>
           <Form onSubmit={handleTapeSubmit} className="mt-2">
             <Form.Group controlId="tape-name" name="tape-name">
               <Form.Label>Tape Name</Form.Label>
@@ -66,7 +66,6 @@ const MakeTape = props => {
             </div>
           </Form>
         </Modal.Body>
-        <Modal.Footer className="modal-footer" />
       </Modal>
     </>
   );

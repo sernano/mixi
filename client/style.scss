@@ -10,6 +10,9 @@ $darker-gray: #181a1b;
 
 /* Bootstrap Overrides */
 $body-bg: $darker-gray;
+$modal-content-bg: $darker-gray;
+$modal-content-border-color: $darker-gray;
+$modal-header-border-color: $modal-content-border-color;
 
 $primary: #e83e8c;
 
@@ -64,22 +67,8 @@ input::placeholder {
 }
 
 /* Modal Styles */
-.modal {
-  border: none;
-}
-
 .modal-header {
   background-color: $dark-gray;
-  border: none;
-}
-
-.modal-body {
-  background-color: $darker-gray;
-}
-
-.modal-footer {
-  background-color: $darker-gray;
-  border: none;
 }
 
 .default-cursor {
