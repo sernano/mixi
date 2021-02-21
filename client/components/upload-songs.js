@@ -2,7 +2,7 @@ import React from 'react';
 import Uppy from '@uppy/core';
 import XHRUpload from '@uppy/xhr-upload';
 import {DragDrop} from '@uppy/react';
-import {Row, Col, ListGroup, ListGroupItem, Button} from 'react-bootstrap';
+import {Modal, Button} from 'react-bootstrap';
 
 class UploadSongs extends React.Component {
   constructor(props) {
@@ -12,15 +12,12 @@ class UploadSongs extends React.Component {
       allowedFileTypes: ['.mp3'],
       autoProceed: false
     });
-    this.state = {
-      filesToUpload: []
-    };
     this.handleUpload = this.handleUpload.bind(this);
   }
 
   async handleUpload() {
     await this.uppy.upload();
-    this.props.history.push(`/my-tapes`);
+    this.props.closeUpload();
   }
 
   componentDidMount() {
@@ -28,11 +25,6 @@ class UploadSongs extends React.Component {
       endpoint: '/api/songs/',
       method: 'post',
       formData: true
-    });
-    this.uppy.on('file-added', () => {
-      this.setState({
-        filesToUpload: this.uppy.getFiles()
-      });
     });
   }
 
@@ -42,11 +34,11 @@ class UploadSongs extends React.Component {
 
   render() {
     return (
-      <Row className="justify-content-center">
-        <Col xs={12}>
-          <h2 className="text-center mb-5">Upload Songs</h2>
-        </Col>
-        <Col md={6}>
+      <Modal show={this.props.showUpload} onHide={this.props.closeUpload}>
+        <Modal.Header closeButton>
+          <Modal.Title>Upload Songs</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <DragDrop
             className="justify-content-center"
             width="100%"
@@ -70,20 +62,8 @@ class UploadSongs extends React.Component {
           >
             Upload
           </Button>
-        </Col>
-        <Col md={6}>
-          <h5 className="mb-4">Files selected:</h5>
-          <ListGroup>
-            {this.state.filesToUpload.map(file => {
-              return (
-                <ListGroupItem key={file.size}>
-                  <h6>{file.name}</h6>
-                </ListGroupItem>
-              );
-            })}
-          </ListGroup>
-        </Col>
-      </Row>
+        </Modal.Body>
+      </Modal>
     );
   }
 }
