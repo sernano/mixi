@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import {logout} from '../store';
 import {Container, Row, Col, Nav} from 'react-bootstrap';
 import MakeTape from './make-tape';
+import UploadSongs from './upload-songs';
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <Container fluid className="navbar-containers">
@@ -32,16 +33,24 @@ function loggedInNavbar({handleClick}) {
   const closeMakeTape = () => setShowMakeTape(false);
   const openMakeTape = () => setShowMakeTape(true);
 
+  // Functions for Upload Songs modal
+  const [showUpload, setShowUpload] = useState(false);
+  const closeUpload = () => setShowUpload(false);
+  const openUpload = () => setShowUpload(true);
+
   return (
     <>
       <MakeTape showMakeTape={showMakeTape} closeMakeTape={closeMakeTape} />
+      <UploadSongs showUpload={showUpload} closeUpload={closeUpload} />
       <Nav className={navClasses} id="nav-links">
         {/* The navbar will show these links after you log in */}
         <Link to="/my-tapes">My Tapes</Link>
         <a href="#" onClick={openMakeTape}>
           New Tape
         </a>
-        <Link to="/upload-songs">Upload Songs</Link>
+        <a href="#" onClick={openUpload}>
+          Upload Songs
+        </a>
         <a href="#" onClick={handleClick}>
           Logout
         </a>
