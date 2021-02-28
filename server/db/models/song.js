@@ -30,7 +30,7 @@ const Song = db.define('song', {
   coverArtUrl: {
     type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: 'Default image url here',
+    defaultValue: '/covers/no_art.jpg',
     validate: {
       notEmpty: true
     }
