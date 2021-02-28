@@ -1,13 +1,3 @@
-// State should be an array of songs that represents the current
-// playlist.
-//
-// The + next to the songs in the library in the edit playlist view
-// should add that song to the end of the current playlist.
-//
-// The - next to the song in the tape playlist column should remove
-// the song from that playlist.
-//
-//
 import axios from 'axios';
 
 const SET_SONGS = 'SET_SONGS_TO_TAPE';
@@ -68,6 +58,7 @@ export const removeSongFromTape = (song, playlistInfo) => {
     }
   };
 };
+
 const initialState = [];
 
 export default function activeTape(state = initialState, action) {
